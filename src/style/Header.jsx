@@ -4,7 +4,7 @@ import headlogo from "../images/headlogo.png";
 
 const NavContainer = styled.div`
   height: 8rem;
-  width: 2000px;
+  width: 100vw;
   display: flex;
   position: relative;
   left: 0px;

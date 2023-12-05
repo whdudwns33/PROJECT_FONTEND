@@ -18,71 +18,71 @@ const Code8Head = styled.div`
   display: flex;
   position: relative;
   border: 1px solid white;
-  padding-left: 80px;
+  padding-left: 8rem;
 
   align-items: center;
   flex-direction: row;
 `;
 
 const TextBox01 = styled.div`
-  font-size: 20px;
-  display: flex;
+  font-size: 2rem;
+  // display: flex;
   position: relative;
   font-weight: bold;
   color: white;
-  padding-right: 130px;
+  padding-right: 13rem;
   text-align: center;
-  width: 50px;
 `;
+
 const Textbox02 = styled.div`
-  font-size: 20px;
+  font-size: 2rem;
   display: flex;
   position: relative;
   font-weight: bold;
   color: white;
-  padding-right: 130px;
+  padding-right: 13rem;
   text-align: center;
 `;
 
 const Textbox03 = styled.div`
-  font-size: 20px;
+  font-size: 2rem;
   display: flex;
   position: relative;
   font-weight: bold;
   color: white;
-  padding-right: 400px;
+  padding-right: 30rem;
   text-align: center;
-  width: 100px;
+  width: 10rem;
 `;
 
 const HeadLogo = styled.img`
-  width: 120px;
-  height: 50px;
+  width: 12rem;
+  height: 5rem;
   display: flex;
   position: relative;
-  padding-right: 600px;
+  padding-right: 30rem;
 `;
 
 const Textbox04 = styled.div`
-  font-size: 20px;
+  font-size: 2rem;
   display: flex;
   position: relative;
   font-weight: bold;
   color: white;
-  padding-right: 80px;
+  padding-right: 8rem;
   text-align: center;
-  width: 80px;
+  width: 8rem;
 `;
 
 const Textbox05 = styled.div`
-  font-size: 20px;
+  font-size: 2rem;
   display: flex;
   position: relative;
   font-weight: bold;
   color: white;
   text-align: center;
   width: 100px;
-  margin-right: 80px;
+  margin-right: 8rem;
 `;
 
 const Header = () => {

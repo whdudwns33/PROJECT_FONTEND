@@ -2,7 +2,7 @@
 import KakaomapComponent from "../../component/performance/KakaomapComponent";
 import GlobalStyle from "../../style/GlobalStyle";
 import { Container, SearchBanner, Box, Map, ConcertList } from "../../style/performance/PerformanceStyle";
-import PerformanceList from "../../component/performance/performanceList";
+import PerformanceList from "../../component/performance/PerformanceList";
 import { useEffect, useState } from "react";
 import AxiosApi from "../../api/AxiosApi";
 

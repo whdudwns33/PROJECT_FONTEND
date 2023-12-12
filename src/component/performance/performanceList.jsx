@@ -6,9 +6,9 @@ import PerformanceCardView from "./PerformanceCardView";
 const CardContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  width: 210rem;
-  gap: 8px;
-  justify-content: start;
+  width: 220rem;
+  gap: 2rem;
+  justify-content: center;
   margin: 20px;
 `;
 
@@ -53,6 +53,7 @@ const PerformanceList = ({ performanceList }) => {
     const totalPage = async () => {
       try {
         console.log("performanceList 총페이지수계산 시도")
+        console.log(performanceList);
         const res = await AxiosApi.getPerformancePage(0, 10);
         setTotalPage(res.data);
       } catch (error) {
@@ -61,22 +62,6 @@ const PerformanceList = ({ performanceList }) => {
     };
     totalPage();
   }, []);
-
-  
-
-  // // 공연 목록 조회
-  // useEffect(() => {
-  //   const performanceList = async () => {
-  //     try {
-  //       const res = await AxiosApi.getPerformancePageList(currentPage, 10);
-  //       console.log(res.data);
-  //       setPerformanceList(res.data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   performanceList();
-  // }, [currentPage]);
 
   // 페이지 이동
   const handlePageChange = (number) => {
@@ -103,7 +88,8 @@ const PerformanceList = ({ performanceList }) => {
     <CardContainer>
     {performanceList.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).map((performance) => (
         <PerformanceCardView
-          key={performance.id}
+          key={performance.performanceId}
+          id={performance.performanceId}
           image={performance.performanceImage}
           title={performance.performanceName}
           venue={performance.venue}

@@ -4,7 +4,7 @@ import GlobalStyle from "../../style/GlobalStyle";
 import { Container, SearchBanner, Box, Map, ConcertList } from "../../style/performance/PerformanceStyle";
 import PerformanceList from "../../component/performance/PerformanceList";
 import { useEffect, useState } from "react";
-import AxiosApi from "../../api/AxiosApi";
+import AxiosApi from "../../api/PerformanceAxios";
 
 const Performance = () => {
 
@@ -15,20 +15,23 @@ const Performance = () => {
 
     useEffect(() => {
         // 컴포넌트가 마운트될 때 공연 데이터를 불러옵니다.
-        AxiosApi.getPerformanceList()
-            .then(response => {
+        const fetchPerformanceList = async () => {
+            try {
+                const response = await AxiosApi.getPerformanceList();
                 setPerformanceList(response.data);
-            })
-            .catch(error => {
+            } catch (error) {
                 console.error('Error fetching performance list', error);
-            });
+            }
+        };
+        fetchPerformanceList();
     }, []);
 
     // searchTerm 또는 performanceList 상태가 변경될 때마다 필터링된 데이터를 업데이트합니다.
     useEffect(() => {
         const filtered = performanceList.filter(performance => 
             performance.performanceName.includes(searchTerm) || performance.performer.includes(searchTerm) // 공연명 또는 공연자명에 검색어가 포함되어 있을 경우 필터링
-        );
+        )
+        .sort((a, b) => new Date(b.performanceDate) - new Date(a.performanceDate)); // 최신 날짜 순으로 정렬
         setFilteredPerformanceList(filtered);
     }, [searchTerm, performanceList]);
 

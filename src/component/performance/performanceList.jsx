@@ -1,4 +1,4 @@
-import AxiosApi from "../../api/AxiosApi";
+import AxiosApi from "../../api/PerformanceAxios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import PerformanceCardView from "./PerformanceCardView";

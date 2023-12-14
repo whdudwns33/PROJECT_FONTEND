@@ -9,13 +9,17 @@ import KakaoLogin from "./api/KakaoLoginApi";
 import MainPage from "./pages/MainPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignUpPage";
+import MusicInfo from "./pages/MusicPage/MusicInfoPage";
+import MusicRegistPage from "./pages/MusicPage/MusicRegistPage";
+import MusicList from "./pages/MusicPage/MusicListPage";
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <Header />
       <Router>
+        <Header />
+
         <Routes>
           <Route path="/performance" element={<Performance />} />
           <Route
@@ -26,9 +30,15 @@ function App() {
           <Route path="/login" element={<LoginPage></LoginPage>} />
           <Route path="/signup" element={<SignupPage></SignupPage>} />
           <Route path="/kakao" element={<KakaoLogin></KakaoLogin>} />
+          <Route
+            path="/music-regist"
+            element={<MusicRegistPage></MusicRegistPage>}
+          />
+          <Route path="/music-list" element={<MusicList></MusicList>} />
+          <Route path="/music-info" element={<MusicInfo></MusicInfo>} />
         </Routes>
+        <Footer />
       </Router>
-      <Footer />
     </>
   );
 }

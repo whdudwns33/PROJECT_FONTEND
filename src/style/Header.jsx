@@ -3,99 +3,65 @@ import styled from "styled-components";
 import headlogo from "../images/Symbol_white.png";
 
 const NavContainer = styled.div`
-  height: 8rem;
-  width: 100vw;
-  display: flex;
-  position: relative;
-  left: 0px;
-  top: 0px;
-  background: #000000;
-`;
-
-const Code8Head = styled.div`
-  height: 8rem;
   width: 100%;
+  background-color: black;
+  height: 8rem;
   display: flex;
-  position: relative;
-  border: 1px solid white;
-  padding-left: 8rem;
-
+  justify-content: space-between;
   align-items: center;
-  flex-direction: row;
+
+  .rightzone {
+    margin-left: 4%;
+    width: 35%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .leftzone{
+    display: flex;
+    width: 35%;
+    justify-content: flex-end;
+    .leftinleft{
+      display: flex;
+      justify-content: space-between;
+      width: 40%;
+      margin-right: 10%;
+    }
+  }
 `;
 
-const TextBox01 = styled.div`
-  font-size: 2rem;
-  // display: flex;
-  position: relative;
-  font-weight: bold;
-  color: white;
-  padding-right: 13rem;
-  text-align: center;
-`;
-
-const Textbox02 = styled.div`
-  font-size: 2rem;
-  display: flex;
-  position: relative;
-  font-weight: bold;
-  color: white;
-  padding-right: 13rem;
-  text-align: center;
-`;
-
-const Textbox03 = styled.div`
-  font-size: 2rem;
-  display: flex;
-  position: relative;
-  font-weight: bold;
-  color: white;
-  padding-right: 30rem;
-  text-align: center;
-  width: 10rem;
-`;
-
-const HeadLogo = styled.img`
-  width: 12rem;
+const HeadLogo = styled.div`
+  width: 30%;
   height: 5rem;
-  display: flex;
-  position: relative;
-  padding-right: 30rem;
+  background-image: url(${headlogo});
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
 `;
 
-const Textbox04 = styled.div`
-  font-size: 2rem;
-  display: flex;
-  position: relative;
-  font-weight: bold;
+const TextBox = styled.div`
   color: white;
-  padding-right: 8rem;
-  text-align: center;
-  width: 8rem;
-`;
-
-const Textbox05 = styled.div`
   font-size: 2rem;
-  display: flex;
-  position: relative;
-  font-weight: bold;
-  color: white;
-  text-align: center;
-  width: 100px;
-  margin-right: 8rem;
+  font-weight: 300;
 `;
 
 const Header = () => {
   return (
     <NavContainer>
-      <Code8Head>
-        <TextBox01>공연</TextBox01>
-        <Textbox02>STORE</Textbox02>
-        <Textbox03>공지사항</Textbox03>
-        <HeadLogo alt="헤더바로고" src={headlogo}></HeadLogo>
-        <Textbox04>로그인</Textbox04>
-        <Textbox05>회원가입</Textbox05>
-      </Code8Head>
+      <div className="rightzone">
+          <TextBox>공연</TextBox>
+          <TextBox>STORE</TextBox>
+          <TextBox>음원</TextBox>
+          <TextBox>커뮤니티</TextBox>
+        </div>
+      <HeadLogo />
+        <div className="leftzone">
+          <div className="leftinleft">
+            <TextBox>로그인</TextBox>
+            <TextBox>회원가입</TextBox>
+          </div>
+        </div>
     </NavContainer>
   );
 };

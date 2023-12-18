@@ -682,14 +682,7 @@ const MusicInfo = () => {
             {musicInfo && ( // musicInfo가 null이 아닌 경우에만 해당 내용을 렌더링합니다.
               <>
                 <LyricsTitle>가사</LyricsTitle>
-                <LyricsBox>
-                  {" "}
-                  {musicInfo.musicDTO.lyrics ? (
-                    <FetchLyrics url={musicInfo.musicDTO.lyrics} />
-                  ) : (
-                    <p>가사를 불러올 수 없습니다.</p>
-                  )}
-                </LyricsBox>
+                <LyricsBox>{musicInfo.musicDTO.lyrics}</LyricsBox>
               </>
             )}
           </LyricsInfo>

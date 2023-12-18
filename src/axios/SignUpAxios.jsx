@@ -1,6 +1,6 @@
 import axios from "axios";
 import Common from "../utils/Common";
-import { CHORD8_DOMAIN } from "../utils/Common";
+import { CHORD8_DOMAIN, Interceptor } from "../utils/Common";
 
 // 로그인, 회원가입 axios 모음
 const SignUpAxios = {
@@ -37,9 +37,7 @@ const SignUpAxios = {
 
   // 이메일 문자 인증
   memberEmail: async (email) => {
-    return await axios.post(
-      CHORD8_DOMAIN + `/auth/mailConfirm?email=${email}`
-    );
+    return await axios.post(CHORD8_DOMAIN + `/auth/mailConfirm?email=${email}`);
   },
 
   // 이메일 인증 번호 체크
@@ -82,6 +80,20 @@ const SignUpAxios = {
   // 카카오 로그인 및 토큰 발급
   kakaoToken: async (email) => {
     return await axios.get(CHORD8_DOMAIN + `/auth/kakaoToken=${email}`);
+  },
+
+  // 로그인 상태 체크
+  isLogin: async () => {
+    const email = window.localStorage.getItem("email");
+    const accessToken = Common.getAccessToken();
+    console.log("로그인 상태 체크의 엑세스 토큰 : ", accessToken);
+    // 인터셉터 자체로 리프레쉬 토큰 체크가 있으므로 로그인 체크는 axios를 활용
+    return await axios.get(CHORD8_DOMAIN + `/user/isLogin?email=${email}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + accessToken,
+      },
+    });
   },
 };
 

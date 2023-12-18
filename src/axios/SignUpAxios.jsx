@@ -79,7 +79,7 @@ const SignUpAxios = {
 
   // 카카오 로그인 및 토큰 발급
   kakaoToken: async (email) => {
-    return await axios.get(CHORD8_DOMAIN + `/auth/kakaoToken=${email}`);
+    return await axios.get(CHORD8_DOMAIN + `/auth/kakaoToken?email=${email}`);
   },
 
   // 로그인 상태 체크

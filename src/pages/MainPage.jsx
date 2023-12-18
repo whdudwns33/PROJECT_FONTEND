@@ -12,7 +12,7 @@ import {
   P2,
   P3,
 } from "../component/main/MainPageComponent";
-import Carousel from "../component/main/Carousel ";
+import Carousel from "../component/main/CatouselSlider";
 import NewList from "../component/main/NewList";
 
 const MainPage = () => {

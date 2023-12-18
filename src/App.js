@@ -12,6 +12,7 @@ import SignupPage from "./pages/SignUpPage";
 import MusicInfo from "./pages/MusicPage/MusicInfoPage";
 import MusicRegistPage from "./pages/MusicPage/MusicRegistPage";
 import MusicList from "./pages/MusicPage/MusicListPage";
+import Test from "./pages/SimpleTest";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           />
           <Route path="/music-list" element={<MusicList></MusicList>} />
           <Route path="/music-info" element={<MusicInfo></MusicInfo>} />
+          <Route path="/test" element={<Test></Test>} />
         </Routes>
         <Footer />
       </Router>

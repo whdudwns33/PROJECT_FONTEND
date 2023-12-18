@@ -4,7 +4,7 @@ import styled, { css, keyframes } from "styled-components";
 import likeheart from "../../images/Heart.png";
 import buyimg from "../../images/Basket.png";
 import artistImg from "../../images/Artist_2.png";
-import FetchLyrics from "../../component/MusicList/FetchLyrics";
+// import FetchLyrics from "../../component/MusicList/FetchLyrics";
 import ReactAudioPlayer from "react-audio-player";
 import MusicAxiosApi from "../../axios/MusicAxios";
 import InfoPageComment from "../../style/music/InfoPageComment";

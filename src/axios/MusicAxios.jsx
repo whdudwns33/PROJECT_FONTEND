@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CHORD8_DOMAIN } from "../utils/common";
+import { CHORD8_DOMAIN } from "../utils/Common";
 
 const MusicAxiosApi = {
   //음악 목록 조회

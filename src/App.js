@@ -36,7 +36,7 @@ function App() {
             element={<MusicRegistPage></MusicRegistPage>}
           />
           <Route path="/music-list" element={<MusicList></MusicList>} />
-          <Route path="/music-info" element={<MusicInfo></MusicInfo>} />
+          <Route path="//music-info/:id" element={<MusicInfo></MusicInfo>} />
           <Route path="/test" element={<Test></Test>} />
         </Routes>
         <Footer />

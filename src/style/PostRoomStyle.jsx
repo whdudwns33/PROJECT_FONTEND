@@ -2,29 +2,30 @@ import styled from "styled-components";
 
 export const PostContainer = styled.div`
   display: flex;
-  width: 100%;
+  width: 1000px;
   flex-direction: column;
   padding: 0px 21.6px 0px 36px;
-  flex: 1 0 0;
+  flex: 1;
+  word-wrap: break-word;
 `;
 export const PostHeader = styled.div`
   display: flex;
-  flex-direction: column-reverse;
-  justify-content: space-between;
-  border: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
 `;
 export const TitleContainer = styled.div`
   display: flex;
-  flex-direction: row;
 `;
 export const WriterInfo = styled.div`
   display: flex;
-  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 `;
+
 export const PostAuthor = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: flex-start;
+  flex-direction: column;
   padding: 1em;
   font-size: 1em;
   color: #666;
@@ -39,10 +40,15 @@ export const CommentText = styled.p`
   margin: 0;
   padding: 0;
 `;
-export const PostDate = styled.span`
+export const PostNickName = styled.p`
+  display: flex;
+  margin: 0;
+  padding: 0;
+`;
+export const PostDate = styled.p`
   font-size: 0.8em;
   color: #999;
-  padding: 1em;
+  margin: 0;
 `;
 
 export const PostViews = styled.div`
@@ -106,7 +112,13 @@ export const PostDownvote = styled.button`
     background-color: #c82333;
   }
 `;
+export const CommentBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid black;
+`;
 export const CommentContainer = styled.div`
+  width: 100%;
   margin-top: 2em;
   font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
     "Malgun Gothic", "맑은 고딕", arial, Dotum, 돋움, sans-serif;
@@ -126,7 +138,6 @@ export const CommentHeader = styled.div`
 `;
 
 export const InformationContainer = styled.div`
-  display: block;
   width: 100%;
   height: 100%;
   margin: 0;
@@ -165,14 +176,13 @@ export const LargeInput = styled.textarea`
 `;
 export const CommentContent = styled.div`
   display: flex;
+  flex-direction: column;
   flex: 1;
   width: 100%;
   height: 100%;
   font-size: 1em;
   color: #666;
-  padding: 1em 0;
-  border-bottom: 1px solid black;
-  border-top: 1px solid black;
+  padding: 1em;
 `;
 export const FormContainer = styled.div`
   display: flex;
@@ -192,8 +202,8 @@ export const CommentForm = styled.form`
 
 export const CommentButton = styled.button`
   display: block;
-  width: 100px;
-  height: 50px;
+  width: 300px;
+
   margin: 0;
   padding: 0;
   border: 0;
@@ -225,10 +235,10 @@ export const Dropdown = styled.select`
 `;
 export const ReplyFormContainer = styled.div`
   display: flex;
-  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   margin-left: 20px;
-  width: 100%;
-  height: 100%;
 `;
 
 export const ReplyInput = styled.input`

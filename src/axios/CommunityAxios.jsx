@@ -1,5 +1,5 @@
 import axios from "axios";
-import Common from "../utils/common.jsx";
+import Common from "../utils/Common";
 
 const CommunityAxiosApi = {
   // 게시글 조회
@@ -81,7 +81,7 @@ const CommunityAxiosApi = {
   // 댓글 리스트 조회
   getCommentList: async (
     communityId,
-    sortType = "등록순",
+    sortType = "최신순",
     page = 0,
     size = 10
   ) => {
@@ -137,7 +137,7 @@ const CommunityAxiosApi = {
       nickName: nickName,
       password: password,
       communityId: communityId,
-      content: content,
+      content: content[parentCommentId],
       parentCommentId: parentCommentId,
     };
     return await axios.post(Common.DOMAIN + `/api/comment/reply/new`, reply, {
@@ -158,9 +158,32 @@ const CommunityAxiosApi = {
       }
     );
   },
+  // 전체 댓글 수 조회
+  getTotalComments: async (communityId) => {
+    return await axios.get(
+      Common.DOMAIN + `/api/comment/count/${communityId}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  },
+
+  // 댓글 삭제
+  commentDelete: async (commentId) => {
+    return await axios.delete(
+      Common.DOMAIN + `/api/comment/delete/${commentId}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  },
   // 실시간 랭킹 조회
-  getRealtimeRanking: async () => {
-    return await axios.get(Common.DOMAIN + "/api/community/ranking/realtime", {
+  getRanking: async (period) => {
+    return await axios.get(Common.DOMAIN + "/api/community/ranking/" + period, {
       headers: {
         "Content-Type": "application/json",
       },

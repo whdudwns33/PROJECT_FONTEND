@@ -26,15 +26,15 @@ import {
   SmallInput,
   LargeInput,
   FormContainer,
-  ReplyContent,
-  CommentText,
+  PostNickName,
+  CommentBox,
 } from "../../style/PostRoomStyle";
 import CommunityAxiosApi from "../../axios/CommunityAxios";
 import { useParams } from "react-router-dom";
-import Common from "../../utils/common";
 import CommunityRankComponent from "./CommunityRankComponent";
 import useWebSocket from "../../context/useWebsocket";
 import { HeadText } from "../../style/CommunityPostStyle";
+import Common from "../../utils/Common";
 
 const Post = () => {
   const [comments, setComments] = useState([]);
@@ -47,14 +47,21 @@ const Post = () => {
   const [email, setEmail] = useState("");
   const [nickName, setNickName] = useState("");
   const [password, setPassword] = useState("");
-  const [replyNickName, setReplyNickName] = useState("");
-  const [replyPassword, setReplyPassword] = useState("");
-  const segments = post.ipAddress ? post.ipAddress.split(".") : "";
-  const ipAddress = `${segments[0]}.${segments[1]}`;
+  const [replyNickName, setReplyNickName] = useState({});
+  const [replyPassword, setReplyPassword] = useState({});
   const [replyOpen, setReplyOpen] = useState({});
+  const [totalComment, setTotalComment] = useState(0);
+
   const { id } = useParams();
 
   const { sendMessage } = useWebSocket(Common.SOCKET_URL, email);
+
+  const getPartialIp = (ipAddress) => {
+    if (!ipAddress) return "";
+    const segments = ipAddress.split(".");
+    return `${segments[0]}.${segments[1]}`;
+  };
+  const ipAddress = getPartialIp(post.ipAddress);
 
   useEffect(() => {
     const postDetail = async () => {
@@ -63,18 +70,23 @@ const Post = () => {
         setPost(response.data);
         const commentResponse = await CommunityAxiosApi.getCommentList(
           id,
-          currentCommentPage,
-          sortType
+          sortType,
+          currentCommentPage
         );
+        console.log(commentResponse.data.totalPages);
         setComments(commentResponse.data.content);
         setTotalCommentPages(commentResponse.data.totalPages);
+        // 전체 댓글 수 조회
+        const totalCommentsResponse = await CommunityAxiosApi.getTotalComments(
+          id
+        );
+        setTotalComment(totalCommentsResponse.data);
       } catch (error) {
         console.error(error);
       }
     };
-
     postDetail();
-  }, [id, currentCommentPage]);
+  }, [id, currentCommentPage, sortType]);
   const sendCommentMessage = (
     postId,
     commentId,
@@ -114,6 +126,7 @@ const Post = () => {
       // 댓글 작성 후 댓글 목록 다시 불러오기
       const commentResponse = await CommunityAxiosApi.getCommentList(
         id,
+        sortType,
         currentCommentPage
       );
       setComments(commentResponse.data.content);
@@ -124,10 +137,13 @@ const Post = () => {
   // 대댓글 작성 함수
   const replyWrite = async (parentCommentId) => {
     try {
+      const replyAuthorName = replyNickName[parentCommentId];
+      const replyAuthorPassword = replyPassword[parentCommentId];
+
       const response = await CommunityAxiosApi.replyWrite(
         email,
-        replyNickName,
-        replyPassword,
+        replyAuthorName,
+        replyAuthorPassword,
         id,
         newReply,
         parentCommentId
@@ -142,10 +158,12 @@ const Post = () => {
       // 댓글 목록 다시 불러오기
       const commentResponse = await CommunityAxiosApi.getCommentList(
         id,
+        sortType,
         currentCommentPage
       );
       setComments(commentResponse.data.content);
       setNewReply("");
+      setTotalCommentPages(commentResponse.data.totalPages);
     } catch (error) {
       console.error(error);
     }
@@ -172,25 +190,38 @@ const Post = () => {
   // 부모 댓글에만 대댓글을 작성할수 있다.
   const toggleReplyForm = (commentId, parentCommentId) => {
     if (parentCommentId === null) {
+      // 이미 열려있는 댓글 창이면 닫고, 닫혀있는 댓글 창이면 열기
       setReplyOpen((prev) => ({ ...prev, [commentId]: !prev[commentId] }));
-      console.log(parentCommentId);
+      if (replyOpen[commentId]) {
+        // 해당 댓글 창이 이미 열려있는 경우, 상태 업데이트하여 해당 창의 내용 초기화
+        setNewReply((prev) => ({ ...prev, [commentId]: "" }));
+      }
     }
+  };
+  // 답글 작성자 정보를 변경하는 함수
+  const handleReplyAuthorChange = (commentId, name, pass) => {
+    // 댓글 ID에 해당하는 답글 작성자의 닉네임 업데이트
+    setReplyNickName((prev) => ({ ...prev, [commentId]: name }));
+    // 댓글 ID에 해당하는 답글 작성자의 비밀번호 업데이트
+    setReplyPassword((prev) => ({ ...prev, [commentId]: pass }));
   };
 
   return (
     <PostContainer>
-      <CommunityRankComponent />
+      <CommunityRankComponent categoryName={post.categoryName} />
       <PostHeader>
         <WriterInfo>
+          <TitleContainer>
+            <PostTitle>{post.title}</PostTitle>
+            <PostViews>조회수: {post.viewCount}</PostViews>
+          </TitleContainer>
           <PostAuthor>
-            {post.email ? post.email : `${post.nickName}(${ipAddress})`}
+            <PostNickName>
+              {post.email ? post.email : `${post.nickName}(${ipAddress})`}
+            </PostNickName>
+            <PostDate> {Common.formatDate(post.regDate)}</PostDate>
           </PostAuthor>
-          <PostDate> {Common.formatDate(post.regDate)}</PostDate>
         </WriterInfo>
-        <TitleContainer>
-          <PostTitle>{post.title}</PostTitle>
-          <PostViews>조회수: {post.viewCount}</PostViews>
-        </TitleContainer>
       </PostHeader>
       <PostBody>
         <PostContent dangerouslySetInnerHTML={{ __html: post.content }} />
@@ -201,20 +232,26 @@ const Post = () => {
         <PostDownvote onClick={() => vote(false)}>비추천</PostDownvote>
       </PostVotes>
       <CommentHeader>
-        전체 댓글 수: {comments.length}
-        <Dropdown
-          options={["최신순", "등록순", "답글순"]}
-          onChange={(selected) => setSortType(selected.value)}
-        />
+        전체 댓글 수: {totalComment}
+        <Dropdown onChange={(selected) => setSortType(selected.target.value)}>
+          {["최신순", "등록순", "답글순"].map((option, index) => (
+            <option key={index} value={option}>
+              {option}
+            </option>
+          ))}
+        </Dropdown>
       </CommentHeader>
 
       <CommentContainer>
         {comments
           .filter((comment) => comment.parentCommentId === null)
           .map((comment) => (
-            <div key={comment.commentId}>
+            <CommentBox key={comment.commentId}>
               <CommentContent>
-                <>{comment.nickName}</>
+                <>
+                  {comment.nickName}({getPartialIp(comment.ipAddress)})
+                </>
+
                 <>{Common.formatDate(comment.regDate)}</>
                 <HeadText
                   onClick={() =>
@@ -231,14 +268,26 @@ const Post = () => {
                           <FormContainer>
                             <SmallInput
                               type="text"
-                              value={replyNickName}
-                              onChange={(e) => setReplyNickName(e.target.value)}
+                              value={replyNickName[comment.commentId] || ""}
+                              onChange={(e) =>
+                                handleReplyAuthorChange(
+                                  comment.commentId,
+                                  e.target.value,
+                                  replyPassword[comment.commentId]
+                                )
+                              }
                               placeholder="닉네임을 입력하세요"
                             />
                             <SmallInput
                               type="password"
-                              value={replyPassword}
-                              onChange={(e) => setReplyPassword(e.target.value)}
+                              value={replyPassword[comment.commentId] || ""}
+                              onChange={(e) =>
+                                handleReplyAuthorChange(
+                                  comment.commentId,
+                                  replyNickName[comment.commentId],
+                                  e.target.value
+                                )
+                              }
                               placeholder="비밀번호를 입력하세요"
                             />
                           </FormContainer>
@@ -246,8 +295,14 @@ const Post = () => {
                       </>
                     )}
                     <ReplyInput
-                      value={newReply}
-                      onChange={(e) => setNewReply(e.target.value)}
+                      type="text"
+                      value={newReply[comment.commentId] || ""}
+                      onChange={(e) =>
+                        setNewReply({
+                          ...newReply,
+                          [comment.commentId]: e.target.value,
+                        })
+                      }
                     />
                     <ReplyButton
                       type="button"
@@ -262,7 +317,10 @@ const Post = () => {
               {comment.childComments &&
                 comment.childComments.map((childComment) => (
                   <CommentContent style={{ marginLeft: "20px" }}>
-                    <>{childComment.nickName}</>
+                    <>
+                      {childComment.nickName} (
+                      {getPartialIp(childComment.ipAddress)})
+                    </>
                     <>{Common.formatDate(childComment.regDate)}</>
                     <HeadText
                       onClick={() =>
@@ -276,7 +334,7 @@ const Post = () => {
                     </HeadText>
                   </CommentContent>
                 ))}
-            </div>
+            </CommentBox>
           ))}
         {currentCommentPage > 0 && (
           <button onClick={() => setCurrentCommentPage(currentCommentPage - 1)}>

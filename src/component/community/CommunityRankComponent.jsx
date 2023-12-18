@@ -22,30 +22,46 @@ import {
 import CommunityAxiosApi from "../../axios/CommunityAxios";
 import { useNavigate } from "react-router-dom";
 
-const CommunityRankComponent = () => {
+const CommunityRankComponent = ({ categoryName }) => {
   const [ranking, setRanking] = useState([]);
+  const [selectedRanking, setSelectedRanking] = useState("realtime");
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchRanking = async () => {
-      const response = await CommunityAxiosApi.getRealtimeRanking();
+      const response = await CommunityAxiosApi.getRanking(selectedRanking);
       console.log(response.data);
       setRanking(response.data);
     };
 
     fetchRanking();
-  }, []);
+  }, [selectedRanking]);
   return (
     <>
       <Heading>
-        <HeadText>전체 게시판</HeadText>
+        <HeadText>{categoryName} 게시판</HeadText>
       </Heading>
       <HeadLine />
       <Block>
         <ButtonFlex>
-          <ChoiceButton selected={true}>실시간</ChoiceButton>
-          <ChoiceButton selected={false}>주간</ChoiceButton>
-          <ChoiceButton selected={false}>월간</ChoiceButton>
+          <ChoiceButton
+            selected={selectedRanking === "realtime"}
+            onClick={() => setSelectedRanking("realtime")}
+          >
+            실시간
+          </ChoiceButton>
+          <ChoiceButton
+            selected={selectedRanking === "weekly"}
+            onClick={() => setSelectedRanking("weekly")}
+          >
+            주간
+          </ChoiceButton>
+          <ChoiceButton
+            selected={selectedRanking === "monthly"}
+            onClick={() => setSelectedRanking("monthly")}
+          >
+            월간
+          </ChoiceButton>
         </ButtonFlex>
         <PostUpTime>
           <PostUpTimeList>

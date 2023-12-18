@@ -6,7 +6,7 @@ export const PostContainer = styled.div`
   padding: 0px 21.6px 0px 36px;
   flex-direction: column;
   align-items: flex-start;
-  flex: 1 0 0;
+  flex: 1;
 `;
 export const PostSection = styled.div`
   height: 1494.03px;
@@ -84,7 +84,7 @@ export const PostUpTimeList = styled.div`
   max-width: 718px;
   flex-direction: column;
   align-items: center;
-  flex: 1 0 0;
+  flex: 1;
 `;
 export const Swiper = styled.div`
   display: flex;
@@ -93,15 +93,14 @@ export const Swiper = styled.div`
   align-items: flex-start;
 `;
 export const SwiperWrapper = styled.div`
-  display: flex;
-  height: 185px;
+  display: block;
+  height: 300px;
   padding-bottom: 0.1px;
-  align-items: flex-start;
-  align-self: stretch;
+  column-count: 2;
 `;
 export const SwiperSlide = styled.div`
   display: flex;
-  width: 718px;
+  width: 100%;
   flex-direction: column;
   align-items: flex-start;
 `;
@@ -118,29 +117,31 @@ export const PostRankList = styled.div`
   max-width: 718px;
   flex-direction: column;
   align-items: flex-start;
-  flex: 1 0 0;
+  flex: 1;
   align-self: stretch;
 `;
 export const PostRankListItem = styled.div`
   display: flex;
-  padding: 7.2px 155.88px 7.2px 0px;
+  padding: 7.2px 155.88px 7.2px 7px;
   align-items: flex-start;
   align-self: stretch;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
 `;
 export const PostRankLink = styled.div`
   display: flex;
-  /* padding: 7.2px 10px 7.2px -1px; */
   margin-right: 10px;
   align-items: flex-start;
   align-self: stretch;
   color: #333;
 
-  /* ground.buv.co.kr/Inter/Bold 12.6 */
   font-family: Inter;
   font-size: 12.6px;
   font-style: normal;
   font-weight: 700;
-  line-height: 18.9px; /* 150% */
+  line-height: 18.9px;
 `;
 export const PostRankCategory = styled.div`
   display: flex;
@@ -149,12 +150,11 @@ export const PostRankCategory = styled.div`
   align-items: center;
   color: #999;
 
-  /* ground.buv.co.kr/Inter/Medium 12.6 */
   font-family: Inter;
   font-size: 12.6px;
   font-style: normal;
   font-weight: 500;
-  line-height: 18.9px; /* 150% */
+  line-height: 18.9px;
 `;
 export const PostRankContent = styled.div`
   display: flex;
@@ -168,18 +168,18 @@ export const PostRankFrame = styled.div`
   align-items: flex-start;
   color: #000;
 
-  /* ground.buv.co.kr/Inter/Medium 12.6 */
   font-family: Inter;
   font-size: 12.6px;
   font-style: normal;
   font-weight: 500;
-  line-height: 18.9px; /* 150% */
+  line-height: 18.9px;
 `;
 
 export const InputContainer = styled.div`
   position: relative;
   display: flex;
   align-items: center;
+  margin-top: 3em;
   margin-bottom: 3em;
   width: 100%;
 `;
@@ -223,12 +223,11 @@ export const TitleContent = styled.div`
   align-self: stretch;
   color: #333;
 
-  /* ground.buv.co.kr/Inter/Bold 16.2 */
   font-family: Inter;
   font-size: 16.2px;
   font-style: normal;
   font-weight: 700;
-  line-height: 24.3px; /* 150% */
+  line-height: 24.3px;
   width: 100px;
   padding: 0px;
   margin-top: 10px;
@@ -328,9 +327,15 @@ export const TableRowDataIcon = styled(TableRowData)`
 `;
 export const TableRowDataWriter = styled(TableRowData)`
   flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 export const TableRowDataTitle = styled(TableRowData)`
   flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 export const TableRowDataDate = styled(TableRowData)`
@@ -363,12 +368,11 @@ export const PageContant = styled.div`
   align-items: flex-start;
   color: #008bff;
 
-  /* ground.buv.co.kr/Inter/Medium 11.7 */
   font-family: Inter;
   font-size: 11.7px;
   font-style: normal;
   font-weight: 500;
-  line-height: 17.55px; /* 150% */
+  line-height: 17.55px;
 `;
 export const MiddlePage = styled.div`
   display: flex;
@@ -389,5 +393,5 @@ export const Page = styled.a`
   font-size: 12.6px;
   font-style: normal;
   font-weight: 700;
-  line-height: 18px; /* 142.857% */
+  line-height: 18px;
 `;

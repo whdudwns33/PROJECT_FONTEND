@@ -40,14 +40,14 @@ import {
   CommunityItemList,
   MessageBox,
 } from "../style/CommunityStyle";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import CommunityComponent from "../conponent/community/CommunityComponent";
 import WriteComponent from "../conponent/community/CommunityWriteComponent";
 import Post from "../conponent/community/PostRoomComponent";
 import AxiosApi from "../axios/CommunityAxios";
-import Common from "../utils/common";
 import useWebSocket from "../context/useWebsocket";
+import Common from "../utils/Common";
 
 const CommunityPage = () => {
   const [isList, setIsList] = useState(false);

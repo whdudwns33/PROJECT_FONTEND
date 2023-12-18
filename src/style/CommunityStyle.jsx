@@ -3,14 +3,13 @@ import img from "../images/ProFileimage.png";
 
 export const Page = styled.div`
   display: flex;
-  width: 1920px;
-  height: 1609px;
+  width: 100%;
+  height: auto;
   flex-direction: column;
   align-items: flex-start;
 `;
 export const Hidden = styled.div`
   display: flex;
-  min-height: 1080px;
   flex-direction: column;
   align-items: flex-start;
   align-self: stretch;
@@ -18,7 +17,7 @@ export const Hidden = styled.div`
 
 export const Container = styled.div`
   display: flex;
-  height: 280px;
+  width: 100%;
   padding: 60px 170px;
   justify-content: center;
   align-items: center;
@@ -28,11 +27,11 @@ export const Container = styled.div`
 
 export const Section = styled.div`
   display: flex;
-  height: 220px;
+  /* height: 220px; */
   flex-direction: column;
   align-items: center;
   gap: 24px;
-  flex: 1 0 0;
+  flex: 1;
 `;
 export const Title = styled.a`
   width: 16em;
@@ -161,7 +160,7 @@ export const CommunityProfilePart = styled.div`
   align-items: center;
 `;
 export const CommunityProfileImg = styled.div`
-  width: 218.81px;
+  /* width: 218.81px; */
   height: 91px;
   min-width: 218.81px;
   max-width: 218.81px;

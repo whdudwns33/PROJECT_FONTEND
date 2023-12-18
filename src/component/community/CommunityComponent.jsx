@@ -31,9 +31,9 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import CommunityAxiosApi from "../../axios/CommunityAxios";
-import Common from "../../utils/common";
 import CommunityRankComponent from "./CommunityRankComponent";
 import axios from "axios";
+import Common from "../../utils/Common";
 
 const CommunityComponent = () => {
   const navigate = useNavigate();
@@ -42,6 +42,7 @@ const CommunityComponent = () => {
   const [totalPages, setTotalPages] = useState(0);
   const categoryId = Number(useParams().categoryId);
   const validCategoryId = isNaN(categoryId) ? undefined : categoryId;
+  const [totalComments, setTotalComments] = useState([]);
 
   const pageSize = 10;
 
@@ -73,6 +74,7 @@ const CommunityComponent = () => {
     postPage();
   }, [validCategoryId, currentPage, pageSize]);
   useEffect(() => {
+    // 제대로 랜더링 되는지 파악하는 axios 구문 별내용은 없음
     let cancelTokenSource = axios.CancelToken.source();
     const postList = async () => {
       try {
@@ -88,6 +90,15 @@ const CommunityComponent = () => {
                 { cancelToken: cancelTokenSource.token }
               );
         setPosts(rsp.data);
+        console.log(rsp.data);
+        // 전체 댓글 수 조회
+        const totalCommentsResponses = await Promise.all(
+          rsp.data.map((post) => CommunityAxiosApi.getTotalComments(post.id))
+        );
+        const totalComments = totalCommentsResponses.map(
+          (response) => response.data
+        );
+        setTotalComments(totalComments);
       } catch (error) {
         if (!axios.isCancel(error)) {
           console.log(error);
@@ -104,7 +115,11 @@ const CommunityComponent = () => {
     <>
       <PostContainer>
         <PostSection>
-          <CommunityRankComponent />
+          <CommunityRankComponent
+            categoryName={
+              validCategoryId !== undefined ? posts[0]?.categoryName : "전체"
+            }
+          />
           <InputContainer>
             <PostBoarder
               placeholder="새 글을 작성하세요"
@@ -160,7 +175,11 @@ const CommunityComponent = () => {
                         )}
                       </TableRowDataIcon>
                       <TableRowDataWriter>{writerInfo}</TableRowDataWriter>
-                      <TableRowDataTitle>{post.title}</TableRowDataTitle>
+                      <TableRowDataTitle>
+                        {post.title}{" "}
+                        {totalComments[posts.indexOf(post)] > 0 &&
+                          `(${totalComments[posts.indexOf(post)]})`}
+                      </TableRowDataTitle>
                       <TableRowDataDate>
                         {Common.timeFromNow(post.regDate)}
                       </TableRowDataDate>

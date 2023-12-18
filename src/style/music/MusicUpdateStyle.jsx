@@ -257,7 +257,7 @@ export const UpdateZone = styled.div`
 `;
 
 export const SingName = styled.div`
-  width: 30rem;
+  width: 36rem;
   font-weight: 300;
   font-size: 2rem;
   display: flex;
@@ -282,7 +282,7 @@ export const TitleText = styled.div`
 `;
 
 export const Singer = styled.div`
-  width: 30rem;
+  width: 36rem;
   font-weight: 300;
   font-size: 2rem;
   display: flex;
@@ -292,7 +292,7 @@ export const Singer = styled.div`
 `;
 
 export const Composer = styled.div`
-  width: 30rem;
+  width: 36rem;
   font-weight: 300;
   font-size: 2rem;
   display: flex;
@@ -302,7 +302,7 @@ export const Composer = styled.div`
 `;
 
 export const Lyricist = styled.div`
-  width: 30rem;
+  width: 36rem;
   font-weight: 300;
   font-size: 2rem;
   display: flex;
@@ -312,7 +312,7 @@ export const Lyricist = styled.div`
 `;
 
 export const Genre = styled.div`
-  width: 30rem;
+  width: 36rem;
   font-weight: 300;
   font-size: 2rem;
   display: flex;
@@ -322,7 +322,7 @@ export const Genre = styled.div`
 `;
 
 export const Purpose = styled.div`
-  width: 30rem;
+  width: 36rem;
   font-weight: 300;
   font-size: 2rem;
   display: flex;
@@ -336,7 +336,6 @@ export const GenreButtonBox = styled.div`
   height: 10rem;
   display: grid;
 
-  border: 1px solid green;
   position: relative;
   grid-template-row: repeat(2, 1fr);
   grid-template-columns: repeat(4, 1fr);
@@ -373,7 +372,7 @@ export const PurposeButtonBox = styled.div`
   justify-content: center;
   gap: 5rem;
   align-items: center;
-  border: 1px solid green;
+
   position: relative;
 `;
 
@@ -409,17 +408,17 @@ export const Titleimg = styled.div`
 `;
 
 export const SingInfo = styled.div`
-  width: 30rem;
+  width: 36rem;
   font-weight: 300;
   font-size: 1.4rem;
   display: flex;
   position: relative;
   flex-direction: row;
-  gap: 3.6rem;
+  gap: 3.1rem;
 `;
 
 export const Lyrics = styled.div`
-  width: 30rem;
+  width: 38rem;
 
   font-weight: 300;
   font-size: 1.4rem;
@@ -461,7 +460,7 @@ export const InputContainer = styled.div`
 export const InputContainer01 = styled.div`
   padding-left: 3%;
   width: 40rem;
-  border: 1px solid black;
+
   gap: 1rem;
   height: 40rem;
   display: flex;
@@ -473,7 +472,7 @@ export const InputContainer01 = styled.div`
 export const InputContainer02 = styled.div`
   padding-left: 3%;
   width: 40rem;
-  border: 1px solid red;
+
   height: 40rem;
   display: flex;
 
@@ -487,7 +486,6 @@ export const Terms = styled.div`
   flex-direction: column;
   width: 20rem;
   height: 20rem;
-  border: 1px solid green;
 `;
 
 export const TermsTitle = styled.div`
@@ -525,8 +523,8 @@ export const InputBox = styled.input`
 
 export const LyricsInputBox = styled.input`
   margin-bottom: 1rem;
-  width: 70%;
-  height: 10rem;
+  width: 36rem;
+  height: 28rem;
   border: 0.03rem solid var(--mainolive);
 
   &::placeholder {

@@ -14,6 +14,12 @@ const MusicAxiosApi = {
     return await axios.get(CHORD8_DOMAIN + `/music/detail/${id}`);
   },
 
+  //음악 등록
+  addMusic: async (music) => {
+    console.log("음악 등록 AxiosApi 작동");
+    return await axios.post(CHORD8_DOMAIN + `/music/add`, music);
+  },
+
   //음악 페이지 수 조회
 
   getMusicPage: async (page, size) => {

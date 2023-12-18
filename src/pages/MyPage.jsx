@@ -24,6 +24,7 @@ const MyPage = () => {
   const [email, setEmail] = useState("asd123@naver.com");
   const [userInfo, setUserInfo] = useState(null);
   const [userMusic, setUserMusic] = useState(null);
+  const [userPerformance, setUserPerformance] = useState(null);
 
   useEffect(() => {
     const fetchUserInfoAndMusic = async () => {
@@ -42,7 +43,14 @@ const MyPage = () => {
         console.error(error);
       }
     };
-
+    const fetchData = async () => {
+      const response = await MemberInfoAxiosApi.getUserInfoByPerformanceEmail(
+        email
+      );
+      console.log(response.data);
+      setUserPerformance(response.data);
+    };
+    fetchData();
     fetchUserInfoAndMusic();
   }, [email]);
   return (
@@ -52,8 +60,13 @@ const MyPage = () => {
           <MainProfile></MainProfile>
           <ArtistContainer>
             <MainHeadBox>
-              <MainHeadText>공연 횟수 : 1</MainHeadText>
-              <MainHeadText>등록된 음원 : {userMusic.length}</MainHeadText>
+              <MainHeadText>
+                공연 횟수 :{" "}
+                {userPerformance && userPerformance.performances.length}
+              </MainHeadText>
+              <MainHeadText>
+                등록된 음원 : {userMusic && userMusic.length}
+              </MainHeadText>
               <InterBox>
                 <InterBoxText>
                   <Heart />
@@ -83,7 +96,10 @@ const MyPage = () => {
             </MoveButtonBox>
           </PointBox>
         </MainHead>
-        <MypageComponent userMusic={userMusic} />
+        <MypageComponent
+          userMusic={userMusic}
+          userPerformance={userPerformance}
+        />
       </MyPageContainer>
     </>
   );

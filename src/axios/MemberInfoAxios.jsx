@@ -16,6 +16,16 @@ const MemberInfoAxiosApi = {
       },
     });
   },
+  getUserInfoByPerformanceEmail: async (email) => {
+    return await axios.get(
+      Common.DOMAIN + `/performance/infoByEmail?email=${email}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  },
 };
 
 export default MemberInfoAxiosApi;

@@ -1,7 +1,7 @@
 import AxiosApi from "../../axios/PerformanceAxios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import PerformanceCardView from "./PerformanceCardView";
+import PerformanceCardView from "./performanceCardView";
 
 const CardContainer = styled.div`
   display: flex;

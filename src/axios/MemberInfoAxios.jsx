@@ -1,5 +1,5 @@
 import axios from "axios";
-import Common from "../utils/common";
+import Common from "../utils/Common";
 
 const MemberInfoAxiosApi = {
   getUserInfo: async (email) => {

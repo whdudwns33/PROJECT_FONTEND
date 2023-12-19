@@ -3,7 +3,6 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styled from "styled-components";
-
 import { useNavigate } from "react-router-dom";
 import MainAxios from "../../axios/MainAxios";
 
@@ -17,7 +16,7 @@ const Container = styled.div`
 const Contents = styled.div`
   /* border: 3px solid gray; */
   width: 100%;
-  height: 40vh;
+  height: 45vh;
 `;
 
 const Content = styled.div`
@@ -25,7 +24,7 @@ const Content = styled.div`
   border-radius: 20px;
   margin: 0 auto;
   width: 90%;
-  height: 100%;
+  height: 90%;
   background-image: ${(props) => `url(${props.imagePath})`};
   /* background-color: green; */
   background-repeat: no-repeat;
@@ -77,13 +76,14 @@ const CatouselSlider = () => {
     nextArrow: <Custom />,
     prevArrow: <Custom />,
   };
+
   return (
     <Container>
       <Slider {...settings}>
         {list.map((data, index) => (
           <Contents key={index}>
             <Content
-              onClick={() => onClick(data.musicDTO.id)}
+              onDoubleClick={() => onClick(data.musicDTO.id)}
               imagePath={data.musicDTO.thumbnailImage}
             >
               <p>제목 : {data.musicDTO.musicTitle}</p>

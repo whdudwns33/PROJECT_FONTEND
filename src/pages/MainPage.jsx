@@ -14,6 +14,7 @@ import {
 } from "../component/main/MainPageComponent";
 import Carousel from "../component/main/CatouselSlider";
 import NewList from "../component/main/NewList";
+import Comercial from "../component/main/Comercial";
 
 const MainPage = () => {
   return (
@@ -31,7 +32,9 @@ const MainPage = () => {
             <Carousel></Carousel>
           </Artist>
 
-          <Advertisement>광고 영역</Advertisement>
+          <Advertisement>
+            <Comercial></Comercial>
+          </Advertisement>
           <MusicRankTitle>지금 이 순간 인기 있는 음악 Best 100</MusicRankTitle>
           <MusicRank>음악 순위</MusicRank>
           <NewMusicList>

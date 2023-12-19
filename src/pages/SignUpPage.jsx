@@ -432,6 +432,7 @@ const SignupPage = () => {
                       <CheckButton onClick={openKakao}>주소찾기</CheckButton>
 
                       {/* 카카오 주소 찾기 */}
+
                       <KakaoAddr
                         kakao={kakaoModal}
                         close={closeKakao}

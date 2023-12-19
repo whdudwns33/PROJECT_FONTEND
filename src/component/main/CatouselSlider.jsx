@@ -57,8 +57,12 @@ const CatouselSlider = () => {
       const res = await MainAxios.notLoginList();
       console.log("리스트 데이터", res);
       if (res.status === 200) {
-        setList(res.data);
-        console.log("list = res.data", list);
+        // 내림차순으로 정렬
+        const sortedList = res.data
+          .slice()
+          .sort((a, b) => b.musicDTO.purchaseCount - a.musicDTO.purchaseCount);
+        setList(sortedList);
+        console.log("list = res.data", sortedList);
       }
     };
     getList();
@@ -86,6 +90,7 @@ const CatouselSlider = () => {
               onDoubleClick={() => onClick(data.musicDTO.id)}
               imagePath={data.musicDTO.thumbnailImage}
             >
+              <p>판매량 : {data.musicDTO.purchaseCount}</p>
               <p>제목 : {data.musicDTO.musicTitle}</p>
               <p>가수 : {data.userResDto.userNickname}</p>
             </Content>

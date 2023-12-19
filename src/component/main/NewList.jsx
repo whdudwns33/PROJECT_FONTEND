@@ -10,7 +10,6 @@ import styled from "styled-components";
 import MainAxios from "../../axios/MainAxios";
 
 const Container = styled.div`
-  border: 3px solid red;
   width: 100%;
   height: 100%;
 `;
@@ -29,6 +28,7 @@ const Content = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   overflow: hidden;
+  color: green;
 `;
 
 const NewList = () => {
@@ -56,12 +56,13 @@ const NewList = () => {
         pagination={{ clickable: true }}
         scrollbar={{ draggable: true }}
         autoplay={{ delay: 2000 }}
-        // loop={true}
+        loop={true}
       >
         {list.map((data, index) => (
           <SwiperSlide key={index}>
             <Content imagePath={data.musicDTO.thumbnailImage}>
               <p>Titile : {data.musicDTO.musicTitle}</p>
+              <p>Date : {data.musicDTO.releaseDate}</p>
             </Content>
           </SwiperSlide>
         ))}

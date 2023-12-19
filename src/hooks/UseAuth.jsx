@@ -20,13 +20,13 @@ const UseAuth = () => {
           navigator("/login"); // 로그인 페이지로 리다이렉트합니다. 실제 로그인 페이지 경로로 교체하세요.
         }
       } catch (e) {
-        alert("서버의 연결이 불안정합니다.", e);
+        alert("서버의 연결 불안정 혹은 토큰이 만료 되었습니다.", e);
         navigator("/");
       }
     };
 
     checkLoginStatus();
-  }, [navigator]);
+  }, []);
 };
 
 export default UseAuth;

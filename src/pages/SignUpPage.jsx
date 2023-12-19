@@ -178,7 +178,7 @@ const SignupPage = () => {
         // 입력 모달 등장
         setModal(true);
       } else {
-        alert("이메일 정보를 확인하십시오.");
+        alert("이미 존재하는 이메일 혹은 존재하지 않는 이메일입니다.");
       }
     } catch (error) {
       alert("서버의 연결이 불안정 합니다.");

@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import MusicAxiosApi from "../../axios/MusicAxios";
 import { storage } from "../../api/firebase";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+// import firebase from "firebase/compat/app";
+// import "firebase/compat/storage";
+import styled from "styled-components";
 import {
   UpdateZone,
   InputBox,
@@ -25,32 +30,53 @@ import {
   PurposeButtonBox,
   PurposeButton,
   Musicimg,
+  Musicimg01,
   TitleUploadButton,
   SingInfo,
   Lyrics,
   LyricsInputBox,
 } from "../../style/music/MusicUpdateStyle";
 
+const UploadButton = styled.button`
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #45a049;
+  }
+`;
+
 const UpdateBox = () => {
   // 입력값 정보 저장
   const [inputSingName, setinputSingName] = useState(""); // 노래제목
   const [inputSinger, setinputSinger] = useState(""); // 활동명
+  const [userNickName, setUserNickName] = useState(""); // 사용자 닉네임 상태
   const [inputComposer, setinputComposer] = useState(""); // 작곡가이름
   const [inputLyricist, setinputLyricist] = useState(""); // 작사가이름
   const [selectedGenre, setSelectedGenre] = useState(""); // 장르선택
   const [selectedPurpose, setSelectedPurpose] = useState(""); // 목적선택
   const [inputSingInfo, setinputSingInfo] = useState(""); // 곡소개
-  const [inputLyrics, setinputLyrics] = useState(""); // 곡소개
+  const [inputLyrics, setinputLyrics] = useState(""); // 가사
 
   //앨범이미지 등록
   const [inputimgfile, setinputimgFile] = useState(""); //앨범 이미지 입력값
   const [imgfileName, setimgFileName] = useState(""); // 앨범 이미지 이름
   const [url, setUrl] = useState(""); // 앨범 이미지 url
+  const [selectedFile, setFile] = useState(null);
   const [Titleimg, setTitleimg] = useState(""); // 앨범이미지
   const [previewImage, setPreviewImage] = useState(null); //미리보기
 
   //약관동의체크
   const [termsAgreed, setTermsAgreed] = useState(false);
+
+  //등록시킨 음악 ID
+  const [musicId, setMusicId] = useState(null);
+  const params = useParams();
+  const navigate = useNavigate();
 
   //장르 선택 기능
   const handleGenreSelection = (genre) => {
@@ -72,40 +98,28 @@ const UpdateBox = () => {
 
   //이미지 업로드 함수
   const handleFileInputChange = (e) => {
-    const selectedFile = e.target.files[0];
-
-    if (selectedFile) {
-      setinputimgFile(selectedFile);
-
-      // 이미지 미리 보기 설정
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreviewImage(reader.result);
-        console.log("이미지선택 완료, 이미지명: " + e.target.files[0].name);
-      };
-
-      reader.readAsDataURL(selectedFile);
-      setimgFileName(selectedFile.name);
-    } else {
-      setPreviewImage(null);
-    }
+    setFile(e.target.files[0]);
   };
 
-  const handleUploadClick = () => {
-    const storageRef = storage.ref();
-    const fileRef = storageRef.child(imgfileName);
+  const handleUploadClick = async () => {
+    try {
+      const storageRef = storage.ref();
+      const fileRef = storageRef.child(selectedFile.name);
 
-    fileRef
-      .put(inputimgfile)
-      .then((snapshot) => {
-        snapshot.ref.getDownloadURL().then((url) => {
-          console.log("저장경로 확인:", url);
-          setUrl(url);
-        });
-      })
-      .catch((error) => {
-        console.error("파일 업로드 실패:", error);
-      });
+      // 파일을 업로드하고 기다립니다.
+      await fileRef.put(selectedFile);
+      console.log("File uploaded successfully!");
+
+      // 다운로드 URL을 가져오고 기다립니다.
+      const url = await fileRef.getDownloadURL();
+      console.log("저장경로 확인 : " + url);
+
+      // 상태를 업데이트합니다.
+      setUrl(url);
+    } catch (error) {
+      // 에러를 처리합니다.
+      console.error("Upload failed", error);
+    }
   };
 
   // 음악 등록 버튼 활성화 여부
@@ -120,21 +134,40 @@ const UpdateBox = () => {
     inputLyrics &&
     termsAgreed;
 
-  // 음악 등록 버튼 클릭시 실행되는 함수
+  // 음악 등록 버튼 클릭시 실행되는 함수[등록방식 까먹지 말기..]
   const onClickSetMusic = async () => {
     if (isMusicUploadEnabled) {
-      const MusicUploadData = await MusicAxiosApi.addMusic({
-        SingName: inputSingName, //노래제목
-        Singer: inputSinger, //활동명
-        Composer: inputComposer, //작곡가
-        Lyricist: inputLyricist, //작사가
-        Genre: selectedGenre, //장르
-        Purpose: selectedPurpose, //목적
-        SingInfo: inputSingInfo, //곡소개
-        Lyrics: inputLyrics, //가사
-        Titleimg: url,
-      });
-      console.log(MusicUploadData);
+      if (!termsAgreed) {
+        alert("약관에 동의해주세요.");
+        return;
+      }
+
+      try {
+        const MusicUploadData = await MusicAxiosApi.addMusic(
+          inputSingName,
+          inputSinger,
+          inputComposer,
+          inputLyricist,
+          selectedGenre,
+          inputSingInfo,
+          inputLyrics,
+          url
+        );
+        console.log("음악 등록 결과:", MusicUploadData);
+        const id = MusicUploadData.id;
+
+        // 음악 등록 성공 시 알림창 표시
+        if (
+          window.confirm(
+            "음악이 성공적으로 등록되었습니다. 음악 리스트로 이동하시겠습니까?"
+          )
+        ) {
+          navigate("/music-list"); // 확인을 누를 경우 music-list 페이지로 이동
+        }
+      } catch (error) {
+        alert("음악 등록 중 오류가 발생했습니다.");
+        console.error("음악 등록 오류:", error.message);
+      }
     } else {
       alert("빠진 입력 사항이 없는지 확인해주세요.");
       console.error("음악 등록이 불가능합니다. 필수 입력값을 확인해주세요.");
@@ -160,7 +193,7 @@ const UpdateBox = () => {
             <Singer>
               <CategoryText>가수</CategoryText>
               <InputBox
-                placeholder="가수 활동명 입력"
+                placeholder="여러분의 닉네임을 적어주세요" //유저닉네임
                 value={inputSinger}
                 onChange={(e) => setinputSinger(e.target.value)}
               />
@@ -262,11 +295,14 @@ const UpdateBox = () => {
 
           <InputContainer02>
             <Musicimg>
-              <TitleText>타이틀 이미지</TitleText>
-              <InputBox placeholder="이미지명" value={imgfileName} />
-              <TitleUploadButton onChange={handleFileInputChange}>
+              <Musicimg01>
+                <TitleText>타이틀 이미지</TitleText>
+                <InputBox type="file" onChange={handleFileInputChange} />
+              </Musicimg01>
+              <UploadButton onClick={handleUploadClick}>Upload</UploadButton>
+              {/* <TitleUploadButton onClick={handleUploadClick}>
                 업로드
-              </TitleUploadButton>
+              </TitleUploadButton> */}
             </Musicimg>
 
             <SingInfo>
@@ -310,15 +346,6 @@ const UpdateBox = () => {
               />
             </Term02>
           </Terms>
-
-          {/* 이미지 미리 보기 */}
-          {previewImage && (
-            <img
-              src={previewImage}
-              alt="Preview"
-              style={{ width: "100px", height: "100px" }}
-            />
-          )}
         </InputContainer>
 
         {/* 등록 버튼 */}

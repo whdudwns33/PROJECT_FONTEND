@@ -395,23 +395,35 @@ export const PurposeButton = styled.button`
 `;
 
 export const Musicimg = styled.div`
-  width: 30rem;
+  width: 40rem;
+  font-weight: 300;
+  font-size: 1.4rem;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  gap: 0.1rem;
+
+  align-items: center;
+`;
+
+export const Musicimg01 = styled.div`
+  width: 40rem;
   font-weight: 300;
   font-size: 1.4rem;
   display: flex;
   position: relative;
   flex-direction: row;
-  gap: 1rem;
 `;
 
 export const SingInfo = styled.div`
-  width: 36rem;
+  width: 44rem;
   font-weight: 300;
   font-size: 1.4rem;
   display: flex;
   position: relative;
   flex-direction: row;
   gap: 3.1rem;
+  padding-top: 1rem;
 `;
 
 export const Lyrics = styled.div`

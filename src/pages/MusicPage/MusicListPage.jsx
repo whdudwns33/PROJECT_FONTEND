@@ -299,14 +299,14 @@ const ListBox = styled.div`
   margin-bottom: 1rem;
   // padding-left: 3rem;
   background-color: #171717;
-  border: 0.2px solid white;
+   border: 0.2px solid white;
   display: flex;
-  position: relative;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  border-radius: 1rem;
-  gap: 4rem;
+  position: relative:
+   flex-direction: row;
+   align-items: center;
+   justify-content: center;
+   border-radius: 1rem;
+   gap: 4rem;
 `;
 
 const MusicThumnail = styled.img`
@@ -474,7 +474,7 @@ const MusicList = () => {
         //api호출 성공시, musicinfolist상태 업데이트
 
         const promoImageUrls = response.data.map(
-          (item) => item.musicDTO.promoImage
+          (item) => item.musicDTO.thumbnailImage
         );
         setPromoImages(promoImageUrls);
 

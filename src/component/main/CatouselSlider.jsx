@@ -102,6 +102,7 @@ const CatouselSlider = () => {
         breakpoint: 768, // 화면 크기가 768px 이하일 때
         settings: {
           slidesToShow: 1,
+          arrows: false,
         },
       },
       {

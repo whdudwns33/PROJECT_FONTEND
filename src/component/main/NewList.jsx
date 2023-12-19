@@ -5,25 +5,30 @@ import "slick-carousel/slick/slick-theme.css";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import MainAxios from "../../axios/MainAxios";
-import Img from "../../images/LogoSymbol_color.png";
 
 const Container = styled.div`
   /* border: 3px solid black; */
-  height: 80%;
+  height: 90%;
   width: 100%;
   margin-top: 3%;
 `;
 
 const Contents = styled.div`
+  border: 3px solid red;
   width: 100%;
-  height: 30vh;
+  height: 50vh;
+
+  @media (max-width: 768px) {
+    height: 40vh;
+  }
 `;
 
 const Content = styled.div`
+  border: 3px solid blue;
   border-radius: 20px;
   margin: 0 auto;
   width: 90%;
-  height: 80%;
+  height: 60%;
   background-image: ${(props) => `url(${props.imagePath})`};
   background-repeat: no-repeat;
   background-size: cover;
@@ -106,7 +111,6 @@ const CatouselSlider = () => {
               onDoubleClick={() => onClick(data.musicDTO.id)}
               imagePath={data.musicDTO.thumbnailImage}
             ></Content>
-
             <Text>
               {/* <p className="text">{data.musicDTO.releaseDate}</p> */}
               <p className="text">{data.userResDto.userNickname}</p>

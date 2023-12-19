@@ -8,7 +8,7 @@ import {
   Map,
   ConcertList,
 } from "../../style/performance/PerformanceStyle";
-import PerformanceList from "../../component/performance/performanceList";
+import PerformanceList from "../../component/performance/PerformanceList";
 import { useEffect, useState } from "react";
 import AxiosApi from "../../axios/PerformanceAxios";
 import { useNavigate } from "react-router-dom";
@@ -40,8 +40,9 @@ const Performance = () => {
     const filtered = performanceList
       .filter(
         (performance) =>
-          performance.performanceName.includes(searchTerm) ||
-          performance.performer.includes(searchTerm) // 공연명 또는 공연자명에 검색어가 포함되어 있을 경우 필터링
+          performance.performanceName.includes(searchTerm) 
+        //   ||
+        //   performance.performer.includes(searchTerm) // 공연명 또는 공연자명에 검색어가 포함되어 있을 경우 필터링
       )
       .sort(
         (a, b) => new Date(b.performanceDate) - new Date(a.performanceDate)

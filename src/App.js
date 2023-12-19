@@ -5,6 +5,7 @@ import GlobalStyle from "./style/GlobalStyle";
 import Footer from "./style/Footer";
 import Performance from "./pages/performance/Performance";
 import PerformanceDetail from "./pages/performance/PerformanceDetail";
+import PerformanceUpdate from "./pages/performance/PerformanceUpdate";
 import KakaoLogin from "./api/KakaoLoginApi";
 import MainPage from "./pages/MainPage";
 import LoginPage from "./pages/LoginPage";
@@ -14,22 +15,20 @@ import MusicRegistPage from "./pages/MusicPage/MusicRegistPage";
 import MusicList from "./pages/MusicPage/MusicListPage";
 import CommunityPage from "./pages/CommunityPage";
 import MyPage from "./pages/MyPage";
-
 import Test from "./pages/SimpleTest";
+
 
 function App() {
   return (
     <>
       <GlobalStyle />
-
       <Router>
         <Header />
 
         <Routes>
           <Route path="/performance" element={<Performance />} />
-          <Route
-            path="/PerformanceDetail/:id"
-            element={<PerformanceDetail />}
+          <Route path="/PerformanceUpdate" element={<PerformanceUpdate />}/>
+          <Route path="/PerformanceDetail/:id" element={<PerformanceDetail/>}
           />
           <Route path="/" element={<MainPage></MainPage>} />
           <Route path="/login" element={<LoginPage></LoginPage>} />

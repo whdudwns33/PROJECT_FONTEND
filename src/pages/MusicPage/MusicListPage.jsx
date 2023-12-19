@@ -299,14 +299,14 @@ const ListBox = styled.div`
   margin-bottom: 1rem;
   // padding-left: 3rem;
   background-color: #171717;
-   border: 0.2px solid white;
+  border: 0.2px solid white;
   display: flex;
   position: relative;
-   flex-direction: row;
-   align-items: center;
-   justify-content: center;
-   border-radius: 1rem;
-   gap: 4rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  gap: 4rem;
 `;
 
 const MusicThumnail = styled.img`

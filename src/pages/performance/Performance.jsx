@@ -8,7 +8,7 @@ import {
   Map,
   ConcertList,
 } from "../../style/performance/PerformanceStyle";
-import PerformanceList from "../../component/performance/PerformanceList";
+import PerformanceList from "../../component/performance/performanceList";
 import { useEffect, useState } from "react";
 import AxiosApi from "../../axios/PerformanceAxios";
 import { useNavigate } from "react-router-dom";

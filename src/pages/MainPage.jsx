@@ -32,15 +32,15 @@ const MainPage = () => {
             <Carousel></Carousel>
           </Artist>
 
-          <Advertisement>
-            <Comercial></Comercial>
-          </Advertisement>
+          <Advertisement></Advertisement>
           <MusicRankTitle>지금 이 순간 인기 있는 음악 Best 100</MusicRankTitle>
           <MusicRank>음악 순위</MusicRank>
           <NewMusicList>
             <NewList></NewList>
           </NewMusicList>
-          <News>뉴스</News>
+          <News>
+            <Comercial></Comercial>
+          </News>
         </Main>
       </MainContainer>
     </>

@@ -1,57 +1,101 @@
 import React, { useEffect, useState } from "react";
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styled from "styled-components";
-import Img from "../../images/Artist.png";
-import Img2 from "../../images/Artist_2.png";
+
 import { useNavigate } from "react-router-dom";
+import MainAxios from "../../axios/MainAxios";
 
 const Container = styled.div`
   /* border: 3px solid black; */
-  height: 80%;
+  height: 100%;
   width: 100%;
-  margin-top: 3%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+`;
+
+const Contents = styled.div`
+  width: 30%;
+  height: 40%;
 `;
 
 const Content = styled.div`
-  /* border: 3px solid green; */
-  border-radius: 20px;
-  margin: 0 auto;
   width: 100%;
-  height: 50vh;
+  height: 100%;
   background-image: ${(props) => `url(${props.imagePath})`};
-  /* background-color: green; */
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   cursor: pointer;
-  color: gray;
+  overflow: hidden;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
 `;
 
+const Text = styled.div`
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    rgba(255, 255, 255, 0.1),
+    rgba(128, 128, 128, 0.6)
+  );
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  .text {
+    font-size: 2rem;
+    font-weight: 900;
+    line-height: 0;
+    margin-left: 5%;
+  }
+`;
 const Comercial = () => {
-  const list = [Img, Img2, Img, Img2, Img, Img2];
+  const usenavigate = useNavigate();
+  const [list, setList] = useState([]);
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 3000,
+  // 해당 링크로 이동
+  const onClick = (id) => {
+    // 임시
+    usenavigate(`/PerformanceDetail/${id}`);
   };
 
+  useEffect(() => {
+    const getList = async () => {
+      const res = await MainAxios.notLoginPerformList();
+      console.log("공연 정보 : ", res.data);
+      if (res.status === 200) {
+        setList(res.data.slice(0, 6));
+      } else {
+        setList(null);
+      }
+    };
+    getList();
+  }, []);
+
   return (
-    <>
-      <h1>공연 광고 영역</h1>
-      <Slider {...settings}>
-        {list.map((data, index) => (
-          <Content key={index} imagePath={data}></Content>
-        ))}
-      </Slider>
-    </>
+    <Container>
+      {list.map((data, index) => (
+        <Contents key={index}>
+          <Content
+            onDoubleClick={() => onClick(data.performanceId)}
+            imagePath={data.performanceImage}
+          >
+            <Text>
+              {/* 역정렬이므로 가장 아래있을게 가장 먼저 등장 */}
+              <p className="text">{data.performanceName}</p>
+
+              <p className="text">
+                {data.nicknames.map((nickname, index) => (
+                  <span key={index}>{nickname} </span>
+                ))}
+              </p>
+              <p className="text">{data.venue}</p>
+            </Text>
+          </Content>
+        </Contents>
+      ))}
+    </Container>
   );
 };
 

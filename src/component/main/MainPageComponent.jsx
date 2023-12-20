@@ -15,6 +15,8 @@ export const Main = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  box-shadow: 0px 5.75949px 28.7975px rgba(0, 0, 0, 0.12);
+
   @media (max-width: 768px) {
     width: 380px;
   }
@@ -71,12 +73,19 @@ export const Advertisement = styled.div`
   border: 3px solid red;
   width: 100%;
   height: 16%;
+  @media (max-width: 768px) {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
 `;
 // 44
 export const MusicRankTitle = styled.div`
-  border: 3px solid red;
   width: 100%;
-  height: 3%;
+  font-size: 4rem;
+  font-weight: 900;
+  text-align: center;
+  color: #82ccff;
+  text-shadow: 0px 8px 4px rgba(97, 230, 202, 0.25);
 `;
 // 50
 export const MusicRank = styled.div`
@@ -87,17 +96,18 @@ export const MusicRank = styled.div`
 // 70
 
 export const NewMusicList = styled.div`
-  border: 3px solid red;
   width: 100%;
   height: 15%;
+  border-bottom: 3px solid rgba(100, 100, 100, 0.2);
   @media (max-width: 768px) {
     height: 15%;
+    margin-top: 20px;
+    margin-bottom: 40px;
   }
 `;
 // 80
 
 export const News = styled.div`
-  border: 3px solid red;
   width: 100%;
-  height: 15%;
+  height: 16%;
 `;

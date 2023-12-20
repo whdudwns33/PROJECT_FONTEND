@@ -13,10 +13,27 @@ const Container = styled.div`
   margin-top: 3%;
 `;
 
-const Contents = styled.div`
-  border: 3px solid red;
+const Title = styled.div`
   width: 100%;
-  height: 50vh;
+  height: 10%;
+  text-align: center;
+`;
+
+const H1 = styled.p`
+  line-height: 0;
+  font-size: 3rem;
+  font-weight: 900;
+`;
+
+const H2 = styled.p`
+  font-size: 1.3rem;
+  font-weight: 500;
+`;
+
+const Contents = styled.div`
+  /* border: 3px solid red; */
+  width: 100%;
+  height: 40vh;
 
   @media (max-width: 768px) {
     height: 40vh;
@@ -24,7 +41,7 @@ const Contents = styled.div`
 `;
 
 const Content = styled.div`
-  border: 3px solid blue;
+  border: 1px solid gray;
   border-radius: 20px;
   margin: 0 auto;
   width: 90%;
@@ -67,9 +84,9 @@ const CatouselSlider = () => {
       console.log("리스트 데이터", res);
       if (res.status === 200) {
         // 내림차순으로 정렬
-
-        setList(res.data);
-        console.log("list = res.data", res.data);
+        const reversedList = res.data.slice().reverse();
+        setList(reversedList);
+        console.log("list = res.data", reversedList);
       }
     };
     getList();
@@ -104,6 +121,10 @@ const CatouselSlider = () => {
 
   return (
     <Container>
+      <Title>
+        <H2>매일 업로드 되는 </H2>
+        <H1>New Songs List</H1>
+      </Title>
       <Slider {...settings}>
         {list.map((data, index) => (
           <Contents key={index}>
@@ -115,6 +136,7 @@ const CatouselSlider = () => {
               {/* <p className="text">{data.musicDTO.releaseDate}</p> */}
               <p className="text">{data.userResDto.userNickname}</p>
               <p className="text">{data.musicDTO.genre}</p>
+              <p className="text">{data.musicDTO.releaseDate}</p>
             </Text>
           </Contents>
         ))}

@@ -29,13 +29,13 @@ export const ModalBackground = styled.div`
 
 // Modal 오픈 버튼
 export const ModalButton = styled.button`
-  background-color: var(--mainblue);
+  background-color: ${props => props.bgColor || 'var(--mainblue)'};
+  color: ${props => props.textColor || 'white'};
   text-decoration: none;
   border: none;
   width: auto;
   height: auto;
   padding: 1rem;
-  color: white;
   border-radius: 30px;
   font-size: 1.5rem;
   font-weight: 600;
@@ -43,7 +43,8 @@ export const ModalButton = styled.button`
 `;
 
 export const ExitButton = styled(ModalButton)`
-  background-color : var(--mainblue);
+  background-color: ${props => props.bgColor || 'var(--mainblue)'};
+  color: ${props => props.textColor || 'white'};
   border-radius: 5rem;
   text-decoration: none;
   margin: 1rem;
@@ -70,7 +71,7 @@ export const ModalView = styled.div.attrs((props) => ({ role: "dialog", }))`
        }
 `;
 
-export const ModalComponent = ({ open, content, customButton , close }) => {
+export const ModalComponent = ({ open, content, customButton , close, openButtonStyle, closeButtonStyle }) => {
   const [ isOpen, setIsOpen ] = useState(false); // 모달창 열림 여부
 
   const openModalHandler = () => {
@@ -81,7 +82,7 @@ export const ModalComponent = ({ open, content, customButton , close }) => {
   return (
     <>
        <ModalContainer>
-        <ModalButton onClick={openModalHandler}>
+        <ModalButton onClick={openModalHandler} {...openButtonStyle}>
         {/* 클릭하면 Modal이 열린 상태(isOpen)를 boolean 타입으로 변경하는 메소드가 실행되어야 합니다. */}
          {open}
           {/* 조건부 렌더링을 활용해서 Modal이 열린 상태(isOpen이 true인 상태)일 때는 ModalBtn의 내부 텍스트가 'Opened!' 로 Modal이 닫힌 상태(isOpen이 false인 상태)일 때는 ModalBtn 의 내부 텍스트가 'Open Modal'이 되도록 구현 */}
@@ -96,7 +97,7 @@ export const ModalComponent = ({ open, content, customButton , close }) => {
                 {content}
               </div>
               {customButton && <ExitButton onClick={openModalHandler}>{customButton}</ExitButton>}
-              <ExitButton onClick={openModalHandler}>{close}</ExitButton>
+              <ExitButton onClick={openModalHandler} {...closeButtonStyle}>{close}</ExitButton>
             </ModalView>
           </ModalBackground>
           : null

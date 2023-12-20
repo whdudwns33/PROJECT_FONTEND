@@ -4,7 +4,7 @@ import SignUpAxios from "../axios/SignUpAxios";
 
 // 로그인 체크 커스텀 훅
 const UseAuth = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigator = useNavigate(); // React Router의 useHistory 훅을 사용하여 브라우저 히스토리를 조작합니다.
 
   useEffect(() => {

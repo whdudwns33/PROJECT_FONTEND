@@ -1,13 +1,14 @@
 import AxiosApi from "../../axios/PerformanceAxios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import PerformanceCardView from "./performanceCardView";
+import PerformanceCardView from "./PerformanceCardView";
 
 const CardContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 220rem;
   gap: 2rem;
+  margin: 4rem 0;
   justify-content: center;
   /* margin: 20px; */
 `;
@@ -15,7 +16,7 @@ const CardContainer = styled.div`
 const PaginationContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-bottom: 40px;
+  margin-bottom: 4rem;
   width: 100%;
   height: auto;
 `;
@@ -42,17 +43,17 @@ const PageButton = styled.button`
   }
 `;
 
-const PerformanceList = ({ performanceList }) => {
+const PerformanceList = ({ performanceList, onCardMouseOver }) => {
   // const[performanceList, setPerformanceList] = useState([]); // 공연목록 데이터
-  const [currentPage, setCurrentPage] = useState(0); // 현재 페이지
+  const[currentPage, setCurrentPage] = useState(0); // 현재 페이지
   const itemsPerPage = 10; // 한 페이지에 보여줄 아이템 수
-  const [totalPage, setTotalPage] = useState(0); // 전체 페이지
+  const[totalPage, setTotalPage] = useState(0); // 전체 페이지
 
   // 총 페이지 수 계산
   useEffect(() => {
     const totalPage = async () => {
       try {
-        console.log("performanceList 총페이지수계산 시도");
+        console.log("performanceList 총페이지수계산 시도")
         console.log(performanceList);
         const res = await AxiosApi.getPerformancePage(0, 10);
         setTotalPage(res.data);
@@ -71,7 +72,7 @@ const PerformanceList = ({ performanceList }) => {
 
   // 페이지네이션 렌더링
   const renderPagination = () => {
-    const totalPage = Math.ceil(performanceList.length / itemsPerPage);
+    const  totalPage = Math.ceil(performanceList.length / itemsPerPage);
     return (
       <PaginationContainer>
         {Array.from({ length: totalPage }, (_, i) => i + 1).map((page) => (
@@ -85,24 +86,24 @@ const PerformanceList = ({ performanceList }) => {
 
   return (
     <>
-      <CardContainer>
-        {performanceList
-          .slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage)
-          .map((performance) => (
-            <PerformanceCardView
-              key={performance.performanceId}
-              performanceId={performance.performanceId}
-              image={performance.performanceImage}
-              title={performance.performanceName}
-              venue={performance.venue}
-              performer={performance.performer}
-              date={performance.performanceDate}
-            />
-          ))}
-      </CardContainer>
-      {renderPagination()}
+    <CardContainer>
+    {performanceList.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).map((performance) => (
+        <PerformanceCardView
+          key={performance.performanceId}
+          performanceId={performance.performanceId}
+          image={performance.performanceImage}
+          title={performance.performanceName}
+          venue={performance.venue}
+          performer={performance.nicknames}
+          date={performance.performanceDate}
+          onMouseOver={onCardMouseOver}
+          />
+      ))}
+    </CardContainer>
+    {renderPagination()}
+    
     </>
-  );
-};
+  )
+}
 
 export default PerformanceList;

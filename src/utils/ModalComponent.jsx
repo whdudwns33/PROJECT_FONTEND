@@ -14,7 +14,7 @@ export const ModalContainer = styled.div`
 
 // Modal 표시시 뒷배경 처리
 export const ModalBackground = styled.div`
-  z-index: 1; //위치지정 요소
+  z-index: 10; //위치지정 요소
   position: fixed;
   display : flex;
   justify-content : center;
@@ -56,6 +56,7 @@ export const ExitButton = styled(ModalButton)`
 export const ModalView = styled.div.attrs((props) => ({ role: "dialog", }))` 
   // Modal창 CSS를 구현합니다.
   display: flex;
+  background-color: rgba(0,0,0,0);
   align-items: center;
   flex-direction: column;
   border-radius: 2rem;

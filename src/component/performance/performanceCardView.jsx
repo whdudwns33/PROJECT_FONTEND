@@ -14,9 +14,9 @@ const CardView = styled.div`
   border-radius: 3rem;
   background-color: white;
   box-shadow: 0 0.4rem 2rem rgba(0, 0, 0, 0.15);
-  line-height: 1.1; 
+  line-height: 1.1;
   margin-bottom: 2rem;
-  &:hover{
+  &:hover {
     transform: scale(1.05);
     transition: transform 0.2s ease-in-out; // transform 속성에 대한 전환 효과 설정
   }
@@ -129,12 +129,13 @@ const PerformanceCardView = ({
   };
 
   // Performer 문자열 생성
-  const performerString = performer.length > 1 
-    ? `${performer[0]} 외 ${performer.length - 1}명`
-    : performer[0];
-  
+  const performerString =
+    performer.length > 1
+      ? `${performer[0]} 외 ${performer.length - 1}명`
+      : performer[0];
+
   return (
-    <CardView onMouseEnter={()=> onMouseOver(venue)}>
+    <CardView onMouseEnter={() => onMouseOver(venue)}>
       <Poster src={image} alt={`${title} 포스터`} />
       <Title>{title}</Title>
       <Venue>{venue}</Venue>

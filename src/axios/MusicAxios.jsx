@@ -50,7 +50,7 @@ const MusicAxiosApi = {
     return await axios.post(CHORD8_DOMAIN + `/music/new`, musicDTO);
   },
 
-  //음악 좋아요 추가
+  //음악 좋아요 추가*제거
   musicHeart: async (musicId, heartChecker) => {
     console.log("음악 좋아요 추가 AxiosApi 작동");
     const musicHeartDto = {
@@ -58,6 +58,30 @@ const MusicAxiosApi = {
       userEmail: heartChecker,
     };
     return await axios.post(CHORD8_DOMAIN + `/musiclike/like`, musicHeartDto);
+  },
+
+  // 음악 댓글 등록.
+
+  musicCommentRegister: async (musicId, content, userEmail) => {
+    console.log("음악 댓글 등록 AxiosApi 작동");
+    const musiccomment = {
+      musicId: musicId,
+      content: content,
+      userEmail: userEmail,
+    };
+    return await axios.post(CHORD8_DOMAIN + `/musiccomment/new`, musiccomment);
+  },
+
+  // 음악별 댓글 조회.
+  musicCommentList: async (musicId) => {
+    return await axios.get(CHORD8_DOMAIN + `/musiccomment/list/${musicId}`);
+  },
+
+  //댓글 삭제
+  musicCommentDelete: async (musicCommentId) => {
+    return await axios.delete(
+      CHORD8_DOMAIN + `/musiccomment/delete/${musicCommentId}`
+    );
   },
 
   //음악 페이지 수 조회
@@ -76,8 +100,6 @@ const MusicAxiosApi = {
       CHORD8_DOMAIN + `/music/musiclist/page?page=${page}&size=${size}`
     );
   },
-
-  //음악 댓글 입력
 };
 
 export default MusicAxiosApi;

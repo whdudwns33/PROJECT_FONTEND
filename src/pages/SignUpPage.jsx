@@ -27,6 +27,12 @@ const SignupPage = () => {
     setModal(false);
   };
 
+  // 약관 동의 체크
+  const [allAgreed, setAllAgreed] = useState(false);
+  const handleAllAgreeChange = () => {
+    setAllAgreed(!allAgreed);
+  };
+
   // 인증 번호 입력창 제어
   const [sms, setSms] = useState(false);
   const closeSms = () => {
@@ -536,15 +542,19 @@ const SignupPage = () => {
                   <div className="agreement-main">
                     <div className="agreement-main-row">
                       <span style={{ fontWeight: "900" }}>모두 동의</span>
-                      <Agree type="radio"></Agree>
+                      <Agree
+                        type="checkbox"
+                        checked={allAgreed}
+                        onChange={handleAllAgreeChange}
+                      ></Agree>
                     </div>
                     <div className="agreement-main-row">
                       <span>개인정보처리방침(필수)</span>
-                      <Agree type="radio"></Agree>
+                      <Agree type="checkbox" checked={allAgreed}></Agree>
                     </div>
                     <div className="agreement-main-row">
                       <span>이용약관(필수)</span>
-                      <Agree type="radio"></Agree>
+                      <Agree type="checkbox" checked={allAgreed}></Agree>
                     </div>
                   </div>
                 </div>

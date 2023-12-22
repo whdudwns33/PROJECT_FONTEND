@@ -25,7 +25,7 @@ const Contents = styled.div`
   height: 10%;
   border: 3px solid red;
   display: flex;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   justify-content: space-around;
   align-items: center;
 `;
@@ -33,8 +33,11 @@ const Contents = styled.div`
 const Content = styled.div`
   width: 10%;
   color: white;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   cursor: pointer;
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 const HeartSong = () => {

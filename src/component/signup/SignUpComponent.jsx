@@ -205,6 +205,7 @@ export const InputTitle = styled.p`
 export const Input = styled.input`
   background-color: rgba(0, 0, 0, 0.7);
   width: ${(props) => props.width || "60%"};
+  /* height: 60%; */
   border: 1px solid #61e6ca;
   border-radius: 10px;
   color: white;

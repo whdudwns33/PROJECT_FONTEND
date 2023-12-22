@@ -3,7 +3,7 @@ import Login_bg from "../../images/Login_Bg.png";
 import Signup from "../../images/Signup.png";
 
 export const Container = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 100vh;
 `;
 

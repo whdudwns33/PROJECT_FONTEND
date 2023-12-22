@@ -15,9 +15,10 @@ import {
 } from "../component/signup/SignUpComponent";
 import SignUpAxios from "../axios/SignUpAxios";
 import { useNavigate } from "react-router-dom";
-import Modal from "../component/signup/SignUpModal";
 import SmsApi from "../api/SmsApi";
 import KakaoAddr from "../api/KakaoAddrApi";
+import { ModalComponent, ModalButton } from "../utils/ModalComponent";
+import NoneBtnModalComponent from "../utils/NoneBtnModalComponent";
 
 const SignupPage = () => {
   const navigate = useNavigate();
@@ -355,17 +356,28 @@ const SignupPage = () => {
                         onChange={onChangeEmail}
                         onBlur={onChangeEmail}
                       ></Input>
-                      <CheckButton onClick={onClcikCheckEmail}>
-                        인증하기
+                      <CheckButton>
+                        <ModalComponent
+                          open="인증하기"
+                          fontSize={"1rem"}
+                          padding={0}
+                          width={"100%"}
+                          close="닫기"
+                          openButtonStyle={{
+                            bgColor: "#61e6ca",
+                            height: "100%",
+                            lineHeight: "0.2",
+                            fontSize: "1rem",
+                          }}
+                          onClick={onClcikCheckEmail}
+                          content={
+                            <>
+                              <input type="text" onChange={onChangeEPW} />
+                              <button onClick={checkEPW}>확인 </button>
+                            </>
+                          }
+                        ></ModalComponent>
                       </CheckButton>
-                      <Modal
-                        header="인증번호를 입력하세요."
-                        open={modal}
-                        close={closeModal}
-                      >
-                        <input type="text" onChange={onChangeEPW} />
-                        <button onClick={checkEPW}>확인 </button>
-                      </Modal>
                     </div>
                   </div>
 
@@ -432,19 +444,28 @@ const SignupPage = () => {
                       <Input
                         // onChange={onChangeAddr}
                         // onBlur={onChangeAddr}
-                        onClick={onClickAddr}
+                        onClick={openKakao}
                         value={addr + " " + addrDetail}
                       ></Input>
-                      <CheckButton onClick={openKakao}>주소찾기</CheckButton>
+
+                      <CheckButton onClick={openKakao}>
+                        주소찾기
+                        <NoneBtnModalComponent
+                          isOpen={kakaoModal}
+                          setIsOpen={closeKakao}
+                          close={{ text: "닫기" }}
+                          content={
+                            <KakaoAddr
+                              kakao={kakaoModal}
+                              close={closeKakao}
+                              onAddress={setAddr}
+                              onDetailAddress={setAddrDetail}
+                            ></KakaoAddr>
+                          }
+                        />
+                      </CheckButton>
 
                       {/* 카카오 주소 찾기 */}
-
-                      <KakaoAddr
-                        kakao={kakaoModal}
-                        close={closeKakao}
-                        onAddress={setAddr}
-                        onDetailAddress={setAddrDetail}
-                      ></KakaoAddr>
                     </div>
                   </div>
                   <div className="input-session1">

@@ -860,6 +860,7 @@ const MusicInfo = () => {
     musicCommentList();
   }, [id, inputComment]);
 
+  const loggedInUserId = window.localStorage.getItem("userId");
   //음악 댓글 삭제
   const handleDeleteComment = async (musicCommentId) => {
     try {
@@ -1104,9 +1105,20 @@ const MusicInfo = () => {
                       </Commenter>
                       <Commenttext> "{comment.content}"</Commenttext>
 
+                      {/* 댓글 작성자의 ID와 현재 로그인한 사용자의 ID 비교하여 삭제 버튼을 표시하거나 숨김.
+   삭제 버튼은 댓글 작성자와 현재 로그인한 사용자의 ID가 일치할 때만. */}
                       <CommentDeleteButton
+                        style={{
+                          display:
+                            comment.userId === loggedInUserId
+                              ? "block"
+                              : "none",
+                        }}
                         onClick={() =>
-                          handleDeleteComment(comment.musiccommentId)
+                          handleDeleteComment(
+                            comment.musiccommentId,
+                            comment.userId
+                          )
                         }
                       >
                         댓글삭제

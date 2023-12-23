@@ -157,6 +157,9 @@ export const Main = styled.div`
     }
 
     & .agreement {
+      border: 1px solid #61e6ca;
+      border-radius: 20px;
+      margin-top: 3%;
       width: 80%;
       height: 30%;
       display: flex;

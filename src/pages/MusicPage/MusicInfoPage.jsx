@@ -8,6 +8,7 @@ import commentimg from "../../images/postimg05.jpg";
 import commentimg01 from "../../images/postimg03.jpg";
 import ReactAudioPlayer from "react-audio-player";
 import MusicAxiosApi from "../../axios/MusicAxios";
+import { Link } from "react-router-dom";
 
 const BackgroundContainer = styled.div`
   width: 100%;
@@ -426,6 +427,13 @@ const CoperDetail01 = styled.div`
   gap: 2rem;
 `;
 
+const CoperMusicName = styled.div`
+  font-size: 2.5rem;
+  font-weight: bold;
+  display: flex;
+  position: relative;
+`;
+
 const CoperName = styled.div`
   font-size: 2.5rem;
   font-weight: bold;
@@ -713,15 +721,36 @@ const CommentDeleteButton = styled.div`
   }
 `;
 
+const PaginationContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 8rem;
+`;
+
+const PaginationButton = styled.button`
+  margin: 0 5px;
+  padding: 5px 10px;
+  background-color: ${(props) => (props.clicked ? "#00ffa8" : "black")};
+  color: ${(props) => (props.clicked ? "black" : "white")};
+  color: white;
+  cursor: pointer;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* 음영 효과 추가 */
+  transition: box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out,
+    color 0.3s ease-in-out; /* 음영 효과의 변화를 자연스럽게 설정 */
+
+  /* 호버 효과 스타일 */
+  &:hover {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* 호버 시 음영 효과 변경 */
+  }
+`;
+
 const MusicInfo = () => {
   const { id } = useParams();
   console.log("ID:", id); // id 값 확인
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [rotationAngle, setRotationAngle] = useState(0);
-  const [audioSrc, setAudioSrc] = useState(
-    require("../../component/MusicList/testmusic01.mp3")
-  );
+  const [audioSrc, setAudioSrc] = useState("");
 
   const [volume, setVolume] = useState(1);
   const audioPlayerRef = useRef(null);
@@ -750,6 +779,7 @@ const MusicInfo = () => {
         const response = await MusicAxiosApi.getMusicById(id);
         console.log("음악 상세 리스트 조회 : ", response.data);
         setMusicInfo(response.data);
+        setAudioSrc(response.data.musicDTO.musicFile);
       } catch (error) {
         console.log(error);
       }
@@ -828,7 +858,7 @@ const MusicInfo = () => {
       }
     };
     musicCommentList();
-  }, [id]);
+  }, [id, inputComment]);
 
   //음악 댓글 삭제
   const handleDeleteComment = async (musicCommentId) => {
@@ -864,8 +894,33 @@ const MusicInfo = () => {
   }, [musicCommentList, currentPage]);
 
   const handlePageChange = (page) => {
+    const indexOfLastComment = page * commentsPerPage;
+    const indexOfFirstComment = indexOfLastComment - commentsPerPage;
+    const updatedComments = musicCommentList.slice(
+      indexOfFirstComment,
+      indexOfLastComment
+    );
+    setCurrentComments(updatedComments);
     setCurrentPage(page);
   };
+
+  const renderPagination = () => {
+    const pageNumbers = [];
+    for (let i = 1; i <= totalPages; i++) {
+      pageNumbers.push(
+        <PaginationButton
+          key={i}
+          onClick={() => handlePageChange(i)}
+          disabled={currentPage === i}
+          clicked={currentPage === i} // 클릭된 버튼의 스타일을 변경하기 위한 속성
+        >
+          {i}
+        </PaginationButton>
+      );
+    }
+    return pageNumbers;
+  };
+
   //회전기능
   useEffect(() => {
     let rotateInterval;
@@ -985,14 +1040,19 @@ const MusicInfo = () => {
                         />
                         <CoperDetail>
                           <CoperDetail01>
-                            <CoperName>{item.musicDTO.musicTitle}</CoperName>
+                            <CoperMusicName>
+                              {item.musicDTO.musicTitle}
+                            </CoperMusicName>
                             <MusicianTag alt="추천노래" src={artistImg} />
                           </CoperDetail01>
 
                           <CoperDetail02>
                             <LikeBox>
-                              <LikeHeart alt="좋아요하트" src={likeheart} />
-                              <span>음악 좋아요</span>
+                              <Link to={`/music-info/${item.musicDTO.id}`}>
+                                <CoperName>
+                                  {item.userResDto.userNickname}
+                                </CoperName>
+                              </Link>
                             </LikeBox>
                           </CoperDetail02>
                         </CoperDetail>
@@ -1055,20 +1115,7 @@ const MusicInfo = () => {
                   ))}
                 </CommentList>
 
-                <div>
-                  {Array.from(
-                    { length: totalPages },
-                    (_, index) => index + 1
-                  ).map((page) => (
-                    <button
-                      key={page}
-                      onClick={() => handlePageChange(page)}
-                      disabled={currentPage === page}
-                    >
-                      {page}
-                    </button>
-                  ))}
-                </div>
+                <PaginationContainer>{renderPagination()}</PaginationContainer>
               </CommentBOx>
             </CommnetZone>
           </DetailInfoBox>

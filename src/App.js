@@ -18,15 +18,17 @@ import MyPage from "./pages/MyPage";
 import ShopPage from "./pages/Shop/ShopPage";
 import CartPage from "./pages/Product/CartPage";
 import ProductPage from "./pages/Product/ProductPage";
+import OrderFormPage from "./pages/Product/OrderFormPage";
 import Test from "./pages/SimpleTest";
+import { CartProvider } from "./context/CartContext";
 
 function App() {
   return (
     <>
+    <CartProvider>
       <GlobalStyle />
       <Router>
         <Header />
-
         <Routes>
           <Route path="/performance" element={<Performance />} />
           <Route path="/PerformanceUpdate" element={<PerformanceUpdate />} />
@@ -49,14 +51,16 @@ function App() {
             element={<CommunityPage></CommunityPage>}
           />
           <Route path="/mypage" element={<MyPage></MyPage>} />
-          <Route path="/shop" element={<ShopPage></ShopPage>} />
-          <Route path="/product" element={<ProductPage></ProductPage>} />
-          <Route path="/cart" element={<CartPage></CartPage>} />
-          
+          <Route path="/shop" element={<ShopPage />} />
+          <Route path="/product" element={<ProductPage />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/orderform" element={<OrderFormPage />} />
+
           <Route path="/test" element={<Test></Test>} />
         </Routes>
         <Footer />
       </Router>
+      </CartProvider>
     </>
   );
 }

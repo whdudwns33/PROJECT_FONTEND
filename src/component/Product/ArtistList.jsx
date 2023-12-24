@@ -2,7 +2,7 @@ import AxiosApi from "../../axios/ProductAxios";
 import { useState, useEffect } from "react";
 import { ArtistContainer,ArtistText,Artists } from "../../style/Product/Artist";
 
-const ArtistList = ({ onArtistSelect }) => {
+const ArtistList = ({ onArtistSelect}) => {
     const [artists, setArtists] = useState([]);
     useEffect(() => {
         const artistList = async () => {

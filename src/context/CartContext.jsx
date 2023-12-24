@@ -9,20 +9,20 @@ export const useCart = () => useContext(CartContext);
 export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
     // 장바구니에 상품을 추가하는 함수
-    const addToCart = (product, count, price) => {
+    const addToCart = (selectedProduct, count, price) => {
         // 함수 호출 확인
         console.log("addToCart 함수 호출!!");
         // 새로운 장바구니 아이템 객체를 생성
         const newCartItem = {
-            productName: product.productName, // 상품이름
+            productName: selectedProduct.productName, // 상품이름
             quantity: count, // 수량
             price: price, // 단가
             totalPrice: price * count, // 총 가격
-            productId: product.productId // 상품 구분을 위한 상품 ID
+            productId: selectedProduct.productId // 상품 구분을 위한 상품 ID
         };
 
         // 장바구니에 같은 상품이 있는지 확인
-        const existingCartItemIndex = cart.findIndex(item => item.productId === product.productId);
+        const existingCartItemIndex = cart.findIndex(item => item.productId === selectedProduct.productId);
         
         let updatedCart;
         if (existingCartItemIndex >= 0) {

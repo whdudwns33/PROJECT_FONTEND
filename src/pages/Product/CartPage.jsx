@@ -1,7 +1,7 @@
 import React from 'react';
 import { useCart } from '../../context/CartContext';
 import { useNavigate } from 'react-router-dom';
-import ProductItemCnt from "../../component/Product/ItemCount";
+import ProductItemCnt from "../../component/Product/ProductItemCnt";
 import {
   CartLayout,
   CartContainer,

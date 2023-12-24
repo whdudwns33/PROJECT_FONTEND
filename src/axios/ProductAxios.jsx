@@ -1,5 +1,6 @@
 import axios from "axios";
-import {Common, Interceptor} from "../utils/Common"
+import Common from "../utils/Common";
+import { Interceptor } from "../utils/Common";
 
 
 const BACK_DOMAIN = "http://localhost:8111";
@@ -26,7 +27,7 @@ const AxiosApi = {
         return await axios.get(BACK_DOMAIN + "/news/newslist")
     },
 
-    // 물건 결제하기
+    // 상품 결제하기
     doPurchase: async (price) => {
       const accessToken = Common.getAccessToken();
       const productDto = {
@@ -38,25 +39,10 @@ const AxiosApi = {
           "Content-Type": "application/json",
           Authorization: "Bearer " + accessToken,
         },
-      } )
+      });
     }
 };
 export default AxiosApi;
-
-export const getProduct = async () => {
-  try {
-    // console.log(searchQuery);s
-    const response = await fetch(`${BACK_DOMAIN}/"/product/productlist"`)
-    
-    if (!response.ok) {
-      throw new Error('Network fail');
-    }
-    return await response.json();
-  } catch (error) {
-    console.error('Fetching data failed:', error);
-    throw error;
-  };
-};
 
 export const getSearchedArtists = async (searchQuery) => {
     try {

@@ -77,6 +77,11 @@ export const OrdererPoint = styled.div`
         color: #fff;
     }
 `;
+export const OrdererInput = styled.input`
+    text-align: left;
+    font-size: 16px;
+    margin: 0 15px;
+`;
 
 export const OrderContainer = styled.div`
     display: flex;

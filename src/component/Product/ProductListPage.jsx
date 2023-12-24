@@ -1,4 +1,4 @@
-import { getProduct } from "../../axios/ProductAxios";
+import AxiosApi from "../../axios/ProductAxios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from '../../context/CartContext';
@@ -22,16 +22,16 @@ import {
     ProductName,
     ProductPrice 
 } from "../../style/Product/Product-Detail";
-import ProductItemText from "./ItemText";
-import ProductItemCnt from "./ItemCount";
+import ProductItemText from "./ProductItemText";
+import ProductItemCnt from "./ProductItemCnt";
 
 
-const ProductList = ({ selectedArtist,onArtistSelect }) => {
+const ProductListPage = ({ selectedArtist,products,setProducts}) => {
     const navigate = useNavigate();
-    const [products, setProducts] = useState([]); // 제품 목록 상태
+    // const [products, setProducts] = useState([]); // 제품 목록 상태
     const [selectedProduct, setSelectedProduct] = useState(null); // 선택된 제품 상태
     const [count, setCount] = useState(1); // 상품 수량 관리
-    const [cart, setCart] = useState([]); // 장바구니 상태
+    // const [cart, setCart] = useState([]); // 장바구니 상태
     const { addToCart } = useCart();
 
     // 상품 수량 변경 핸들러
@@ -74,11 +74,11 @@ const ProductList = ({ selectedArtist,onArtistSelect }) => {
         };
     
     // cart 상태가 변경될 때마다 실행
-    useEffect(() => {
-        if (cart.length > 0) {
-            navigateToCart();
-        }
-    }, [cart]);
+    // useEffect(() => {
+    //     if (cart.length > 0) {
+    //         navigateToCart();
+    //     }
+    // }, [cart]);
 
     // selectedArtist가 변경될 때마다 productList 함수를 호출
     useEffect(() => {
@@ -86,10 +86,10 @@ const ProductList = ({ selectedArtist,onArtistSelect }) => {
     }, [selectedArtist]);
 
 
-    // 장바구니 페이지로 이동
-    const navigateToCart = () => {
-        navigate('/cart', { state: { cartItems: cart } }); // cart 상태를 cartItems로 전달
-    };
+    // 장바구니 페이지로 이동ProductItemText
+    // const navigateToCart = () => {
+    //     navigate('/cart', { state: { cartItems: cart } }); // cart 상태를 cartItems로 전달
+    // };
     const handleAddToCart = () => {
         console.log("Adding to cart:", selectedProduct); // 
         // 장바구니에 상품 추가
@@ -105,7 +105,7 @@ const ProductList = ({ selectedArtist,onArtistSelect }) => {
 
     const productList = async () => {
         try {
-            const response = await AxiosApi.getProduct();
+            const response = await AxiosApi.productGet();
             let data = response.data;
             if (selectedArtist) {
                 data = data.filter(product => product.artistName === selectedArtist);
@@ -121,9 +121,9 @@ const ProductList = ({ selectedArtist,onArtistSelect }) => {
     }, []);
 
     const handleProductClick = productId => {
-        console.log("Clicked product ID:", productId); // 로그확인용
+        console.log("Clicked product ID:", productId);
         const product = products.find(p => p.productId === productId);
-        console.log("Selected product:", product); // 여기를 확인
+        console.log("Selected product:", product);
         setSelectedProduct(product);
     };
     
@@ -164,7 +164,7 @@ const ProductList = ({ selectedArtist,onArtistSelect }) => {
                 // 여러 요소를 반환할 때 이들을 하나의 부모 요소로 감싸야 함.
                 <>
                     <ProductContainer>
-                        <ProductItemText selectedArtist={selectedArtist} />
+                        <ProductItemText products={products} />
                         <GridContainer>
                             {products.map(product => (
                                 <GridItem key={product.productId} onClick={() => handleProductClick(product.productId)}>
@@ -181,5 +181,5 @@ const ProductList = ({ selectedArtist,onArtistSelect }) => {
     );
 };
 
-export default ProductList;
+export default ProductListPage;
 

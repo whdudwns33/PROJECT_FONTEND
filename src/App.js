@@ -15,52 +15,57 @@ import MusicRegistPage from "./pages/musicPage/MusicRegistPage";
 import MusicList from "./pages/musicPage/MusicListPage";
 import CommunityPage from "./pages/CommunityPage";
 import MyPage from "./pages/MyPage";
-import FindEmail from "./pages/FindEmail";
-import ShopPage from "./pages/Shop/ShopPage";
-import CartPage from "./pages/Product/CartPage";
-import ProductPage from "./pages/Product/ProductPage";
-import OrderFormPage from "./pages/Product/OrderFormPage";
+// import ShopPage from "./pages/Shop/ShopPage";
+// import CartPage from "./pages/Product/CartPage";
+// import ProductPage from "./pages/Product/ProductPage";
+// import OrderFormPage from "./pages/Product/OrderFormPage";
 import Test from "./pages/SimpleTest";
-import AdminPage from "./pages/AdminPage";
+// import AdminPage from "./pages/AdminPage";
 import { CartProvider } from "./context/CartContext";
-
+import FindEmail from "./pages/FindEmail";
+import FindPassword from "./pages/FindPassword";
 function App() {
   return (
     <>
-    <CartProvider>
-      <GlobalStyle />
-      <Router>
-        <Header />
-        <Routes>
-          <Route path="/performance" element={<Performance />} />
-          <Route path="/PerformanceUpdate" element={<PerformanceUpdate />} />
-          <Route
-            path="/PerformanceDetail/:id"
-            element={<PerformanceDetail />}
-          />
-          <Route path="/" element={<MainPage></MainPage>} />
-          <Route path="/login" element={<LoginPage></LoginPage>} />
-          <Route path="/signup" element={<SignupPage></SignupPage>} />
-          <Route path="/kakao" element={<KakaoLogin></KakaoLogin>} />
-          <Route
-            path="/music-regist"
-            element={<MusicRegistPage></MusicRegistPage>}
-          />
-          <Route path="/music-list" element={<MusicList></MusicList>} />
-          <Route path="/music-info/:id" element={<MusicInfo></MusicInfo>} />
-          <Route
-            path="/communitypage"
-            element={<CommunityPage></CommunityPage>}
-          />
-          <Route path="/mypage" element={<MyPage></MyPage>} />
-          <Route path="/shop" element={<ShopPage></ShopPage>} />
-          <Route path="/product" element={<ProductPage></ProductPage>} />
-          <Route path="/cart" element={<CartPage></CartPage>} />
-          
-          <Route path="/test" element={<Test></Test>} />
-        </Routes>
-        <Footer />
-      </Router>
+      <CartProvider>
+        <GlobalStyle />
+        <Router>
+          <Header />
+          <Routes>
+            <Route path="/performance" element={<Performance />} />
+            <Route path="/PerformanceUpdate" element={<PerformanceUpdate />} />
+            <Route
+              path="/PerformanceDetail/:id"
+              element={<PerformanceDetail />}
+            />
+            <Route path="/" element={<MainPage></MainPage>} />
+            <Route path="/login" element={<LoginPage></LoginPage>} />
+            <Route path="/signup" element={<SignupPage></SignupPage>} />
+            <Route path="/kakao" element={<KakaoLogin></KakaoLogin>} />
+            <Route
+              path="/music-regist"
+              element={<MusicRegistPage></MusicRegistPage>}
+            />
+            <Route path="/music-list" element={<MusicList></MusicList>} />
+            <Route path="/music-info/:id" element={<MusicInfo></MusicInfo>} />
+            <Route
+              path="/communitypage"
+              element={<CommunityPage></CommunityPage>}
+            />
+            <Route path="/mypage" element={<MyPage></MyPage>} />
+            {/* <Route path="/shop" element={<ShopPage></ShopPage>} /> */}
+            {/* <Route path="/product" element={<ProductPage></ProductPage>} /> */}
+            {/* <Route path="/cart" element={<CartPage></CartPage>} /> */}
+            <Route path="/findemail" element={<FindEmail></FindEmail>} />
+            <Route
+              path="/findpassword"
+              element={<FindPassword></FindPassword>}
+            />
+
+            <Route path="/test" element={<Test></Test>} />
+          </Routes>
+          <Footer />
+        </Router>
       </CartProvider>
     </>
   );

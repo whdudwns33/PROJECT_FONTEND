@@ -86,6 +86,20 @@ const SignUpAxios = {
     return await axios.get(CHORD8_DOMAIN + `/auth/kakaoToken?email=${email}`);
   },
 
+  // 이메일 찾기
+  findEmail: async (nickname) => {
+    return await axios.get(CHORD8_DOMAIN + `/auth/find?nickname=${nickname}`);
+  },
+
+  // 비밀번호 변경
+  changePassword: async (nickname, password) => {
+    const dto = {
+      userNickname: nickname,
+      userPassword: password,
+    };
+    return await axios.post(CHORD8_DOMAIN + `/auth/change/password`, dto);
+  },
+
   // 로그인 상태 체크
   isLogin: async () => {
     const accessToken = Common.getAccessToken();

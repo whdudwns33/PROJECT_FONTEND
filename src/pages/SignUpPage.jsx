@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Container, BACKGROUND } from "../component/login/LoginComponent";
+import { BACKGROUND } from "../component/login/LoginComponent";
 import {
   SIGNUP,
   TOP,
@@ -12,6 +12,7 @@ import {
   BOTTOM,
   SignUpButton,
   Agree,
+  CONTAINER,
 } from "../component/signup/SignUpComponent";
 import SignUpAxios from "../axios/SignUpAxios";
 import { useNavigate } from "react-router-dom";
@@ -341,7 +342,7 @@ const SignupPage = () => {
 
   return (
     <>
-      <Container>
+      <CONTAINER>
         <BACKGROUND>
           <SIGNUP>
             <TOP>
@@ -369,8 +370,9 @@ const SignupPage = () => {
                           openButtonStyle={{
                             bgColor: "#61e6ca",
                             height: "100%",
-                            lineHeight: "0.2",
+                            lineHeight: "0",
                             fontSize: "1rem",
+                            fontWeight: "400",
                           }}
                           content={
                             <>
@@ -454,7 +456,7 @@ const SignupPage = () => {
                       ></Input>
 
                       <CheckButton onClick={openKakao}>
-                        주소찾기
+                        <p style={{ lineHeight: "1.1" }}>주소찾기</p>
                         <NoneBtnModalComponent
                           isOpen={kakaoModal}
                           setIsOpen={closeKakao}
@@ -493,7 +495,7 @@ const SignupPage = () => {
                           openButtonStyle={{
                             bgColor: "#61e6ca",
                             height: "100%",
-                            lineHeight: "0.2",
+                            lineHeight: "0.3",
                             fontSize: "1rem",
                           }}
                           content={
@@ -542,6 +544,8 @@ const SignupPage = () => {
                       <div className="session-right-bottom">
                         <Input
                           width="80%"
+                          marginTop="-5px"
+                          height="100%"
                           onChange={onChangeAge}
                           onBlur={onChangeAge}
                           onFocus={onChangeAge}
@@ -576,9 +580,13 @@ const SignupPage = () => {
                   <div className="input-busyness-number">
                     <div className="input-busyness-number-session">
                       <p>사업자 번호</p>
-                      <Input width="100%" onChange={onChangeBiss}></Input>
+                      <Input
+                        width="100%"
+                        height="20%"
+                        onChange={onChangeBiss}
+                      ></Input>
                       <p>상호 명</p>
-                      <Input width="100%"></Input>
+                      <Input width="100%" height="20%"></Input>
                     </div>
                     <div className="check-button-session">
                       <BusynessButton>확인하기</BusynessButton>
@@ -623,7 +631,7 @@ const SignupPage = () => {
             </BOTTOM>
           </SIGNUP>
         </BACKGROUND>
-      </Container>
+      </CONTAINER>
     </>
   );
 };

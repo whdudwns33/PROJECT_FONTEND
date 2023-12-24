@@ -1,11 +1,12 @@
-import AxiosApi from "../../api/AxiosApi";
 import styled from "styled-components";
 import { useState, useEffect, useLayoutEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { GridContainer,GridItem } from "../../style/Shop/Shop-UserList";
-import testimg from "../../images/testimg.jpeg";
+// import testimg from "../../images/testimg.jpeg";
 import UserSearch from "../shop/UserSearch";
-import { getSearchedArtists } from "../../api/AxiosApi";
+import { getSearchedArtists } from "../../axios/ProductAxios";
+import ProductAxios from "../../axios/ProductAxios"
+
 const MAX_ITEMS = 3;
 const ITEM_HEIGHT = 230; // ex) 상품높이
 
@@ -29,6 +30,20 @@ const UserList = () => {
     const [searchQuery, setSearchQuery] = useState("");
     
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const userList = async() => {
+            const res = await ProductAxios.getUserList();
+            console.log("유저 조회 : ", res)
+            // if (res.status === 200) {
+                setList(res.data);
+            // }
+            // else {
+            //     alert("오류 발생!!");
+            // }
+        }
+        userList();
+    }, [])
 
     useEffect(() => {
             const fetchSearchedArtists = async () => {
@@ -73,9 +88,9 @@ const UserList = () => {
             />
             <GridContainer style={{ maxHeight: `${ContainerHeight()}px`, overflow: 'hidden' }}>
                 {list.map((data, index) => (
-                <GridItem key={index} onClick={() => handleProductClick(data.productId)}>
-                    <img alt="testimg" src = {testimg} style={{width:"200px",height:"200px"}}/>
-                    <p>{data.productId}</p>
+                <GridItem key={index} onClick={() => handleProductClick(data.id)}>
+                    <img alt="testimg" src={data.profileImg} style={{width:"200px",height:"200px"}}/>
+                    <p>{data.userNickname}</p>
                 </GridItem>
                 ))}
             </GridContainer>

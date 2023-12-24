@@ -1,4 +1,4 @@
-import AxiosApi from "../../api/AxiosApi";
+import AxiosApi from "../../axios/ProductAxios";
 import { useState, useEffect } from "react";
 import { ArtistContainer,ArtistText,Artists } from "../../style/Product/Artist";
 

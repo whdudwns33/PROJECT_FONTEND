@@ -13,6 +13,7 @@ import {
     OrderBtn,
     PayBtn,
 } from "../../style/Product/OrderFrom";
+import ProductAxios from "../../axios/ProductAxios"
 
 const OrderFormPage = () => {
     const location = useLocation();
@@ -26,12 +27,19 @@ const OrderFormPage = () => {
 
 
     // 결제 페이지로 이동하는 함수
-    const handlePayment = () => {
-        navigate('/purchase', { state: { 
-            cart, 
-            totalAmount, // 총 금액
-            totalQuantity // 총 수량
-        }});
+    const handlePayment = async() => {
+        // navigate('/purchase', { state: { 
+        //     cart, 
+        //     totalAmount, // 총 금액
+        //     totalQuantity // 총 수량
+        // }});
+        const res = await ProductAxios.doPurchase(totalAmount);
+        console.log("결제 결과 : ", res);
+        if (res.data === true) {
+            alert("결제가 완료되었습니다.")
+        } else {
+            alert("결제 실패!! 잔액을 확인하세요.")
+        }
     };
 
     return (

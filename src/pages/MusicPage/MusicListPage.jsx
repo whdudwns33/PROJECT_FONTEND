@@ -302,7 +302,7 @@ const ListBox = styled.div`
   background-color: #171717;
    border: 0.2px solid white;
   display: flex;
-  position: relative:
+  position: relative;
    flex-direction: row;
    align-items: center;
    justify-content: center;
@@ -475,7 +475,7 @@ const SearchInput = styled.input`
     &:focus {
       outline: none;
     }
- 
+  }
 `;
 
 const SearchButton = styled.button`
@@ -496,7 +496,7 @@ const SearchButton = styled.button`
   &:hover {
     transform: scale(1.1); /* 호버 시 크기를 1.1배로 확대 */
     cursor: pointer; /* 호버 시 마우스 커서 변경 */
-
+  }
     /* 클릭 효과 스타일 */
   &:active {
     transform: scale(0.9); /* 클릭 시 크기를 0.9배로 축소 */

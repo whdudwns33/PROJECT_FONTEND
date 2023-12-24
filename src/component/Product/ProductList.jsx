@@ -1,11 +1,30 @@
-import AxiosApi from "../../api/AxiosApi";
+import { getProduct } from "../../axios/ProductAxios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ProuctPrice,ProuctName,ProductContainer, GridContainer, GridItem } from "../../style/Product/Product-Layout";
-import { BtnShape,ClickBtn,TotalAmount,Totality,Quantity,QuantityText,FreeShipping,ItemContainer, ImgContainer, CalContainer,ProductName,ProductPrice } from "../../style/Product/Product-Detail";
+import { useCart } from '../../context/CartContext';
+import { 
+    ProuctPrice,
+    ProuctName,
+    ProductContainer, 
+    GridContainer, 
+    GridItem } from "../../style/Product/Product-Layout";
+import { 
+    BtnShape,
+    ClickBtn,
+    TotalAmount,
+    Totality,
+    Quantity,
+    QuantityText,
+    FreeShipping,
+    ItemContainer, 
+    ImgContainer, 
+    CalContainer,
+    ProductName,
+    ProductPrice 
+} from "../../style/Product/Product-Detail";
 import ProductItemText from "./ItemText";
 import ProductItemCnt from "./ItemCount";
-import { useCart } from '../../Context/CartContext';
+
 
 const ProductList = ({ selectedArtist,onArtistSelect }) => {
     const navigate = useNavigate();
@@ -86,7 +105,7 @@ const ProductList = ({ selectedArtist,onArtistSelect }) => {
 
     const productList = async () => {
         try {
-            const response = await AxiosApi.productGet();
+            const response = await AxiosApi.getProduct();
             let data = response.data;
             if (selectedArtist) {
                 data = data.filter(product => product.artistName === selectedArtist);

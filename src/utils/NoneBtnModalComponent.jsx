@@ -103,6 +103,11 @@ export const NoneBtnModalComponent = ({
       close.func();
     }
   };
+  const customButtonHandler = () => {
+    if ( customButton && customButton.func) {
+      customButton.func();
+    }
+  }
 
   return (
     <>
@@ -112,8 +117,8 @@ export const NoneBtnModalComponent = ({
             <ModalView onClick={(e) => e.stopPropagation()}>
               <div className="desc">{content}</div>
               {customButton && (
-                <ExitButton onClick={closeModalHandler}>
-                  {customButton}
+                <ExitButton onClick={customButtonHandler}>
+                  {customButton && customButton.text}
                 </ExitButton>
               )}
               <ExitButton onClick={closeModalHandler} {...closeButtonStyle}>

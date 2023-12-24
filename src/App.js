@@ -20,6 +20,7 @@ import ShopPage from "./pages/Shop/ShopPage";
 import CartPage from "./pages/Product/CartPage";
 import ProductPage from "./pages/Product/ProductPage";
 import Test from "./pages/SimpleTest";
+import AdminPage from "./pages/AdminPage";
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
             element={<CommunityPage></CommunityPage>}
           />
           <Route path="/mypage" element={<MyPage></MyPage>} />
+          <Route path="/adminpage" element={<AdminPage/>} />
 
           <Route path="/findemail" element={<FindEmail></FindEmail>} />
           <Route path="/shop" element={<ShopPage></ShopPage>} />

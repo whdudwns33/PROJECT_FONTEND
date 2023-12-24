@@ -63,6 +63,20 @@ setPerformance: async (performance) => {
       );
     },
 
+    // 공연 삭제
+    deletePerformance: async (performanceId) => {
+      const accessToken = Common.getAccessToken();
+      console.log("공연삭제 AxiosApi 작동")
+      return await Interceptor.delete(
+        CHORD8_DOMAIN + `/performance/delete/${performanceId}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + accessToken,
+          },
+        }
+      );
+    },
+
     // //공연등록닉네임 조회
     // getPerformerNick: async () => {
     //   console.log("공연등록닉네임조회 AxiosApi 작동")

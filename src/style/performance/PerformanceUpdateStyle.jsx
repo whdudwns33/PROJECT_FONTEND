@@ -139,7 +139,7 @@ export const UserInfo = styled.div`
         width: 100%;
         height: 1rem;
         border-radius: 2rem;
-        border: 0.05rem solid white;
+        border: 0.1rem solid white;
       
       .gageBar{
         width: ${20}%;

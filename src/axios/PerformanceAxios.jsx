@@ -2,7 +2,7 @@ import axios from 'axios';
 import Common from "../utils/Common";
 import { CHORD8_DOMAIN, Interceptor } from "../utils/Common";
 
-const AxiosApi = {
+const PerformanceAxios = {
     // 공연 목록 조회
     getPerformanceList: async () => {
       console.log("공연목록조회 AxiosApi 작동")
@@ -86,4 +86,4 @@ setPerformance: async (performance) => {
     // },
   };
 
-export default AxiosApi;
+export default PerformanceAxios;

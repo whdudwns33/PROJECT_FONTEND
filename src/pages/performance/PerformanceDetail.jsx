@@ -1,4 +1,4 @@
-import AxiosApi from "../../axios/PerformanceAxios";
+import PerformanceAxios from "../../axios/PerformanceAxios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
@@ -186,7 +186,7 @@ const PerformanceDetail = () => {
     useEffect(() => {
         const getMemberInfo = async () => {
           try {
-            const userRes = await AxiosApi.getUserList();
+            const userRes = await PerformanceAxios.getUserList();
             console.log("userRes", userRes);
             const matchingUser = userRes.data.filter(user => performance.nicknames.some(nickname => nickname === user.userNickname));
             // matchingUser 에 userRes.data 중에서 userNickname이 performance.nicknames에 포함되어 있는 요소만 필터링
@@ -223,7 +223,7 @@ const PerformanceDetail = () => {
     // 공연을 삭제하는 함수
     const deletePerformance = async () => {
         try {
-            const res = await AxiosApi.deletePerformance(performance.performanceId);
+            const res = await PerformanceAxios.deletePerformance(performance.performanceId);
             console.log("공연삭제결과: ", res);
             setIsModalOpen(true);
         } catch (error) {

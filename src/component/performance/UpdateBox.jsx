@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { UpdateZone, InputBox, Button, DescriptionInput, ImageInput, FileButton } from "../../style/performance/PerformanceUpdateStyle";
-import AxiosApi from '../../axios/PerformanceAxios';
+import PerformanceAxios from '../../axios/PerformanceAxios';
 import DaumPostcode from 'react-daum-postcode';
 import OutsideClickHandler from 'react-outside-click-handler';
 import { storage } from '../../api/firebase';
@@ -158,7 +158,7 @@ const clearAll = () => {
 
     
 
-    const performanceData = await AxiosApi.setPerformance( // 공연정보 입력값 BE로 전송
+    const performanceData = await PerformanceAxios.setPerformance( // 공연정보 입력값 BE로 전송
       {
         performer: inputPerformer, // 참여자
         venue: inputVenue, // 주소

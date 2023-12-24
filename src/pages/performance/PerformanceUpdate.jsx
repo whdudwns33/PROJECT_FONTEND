@@ -1,4 +1,4 @@
-import AxiosApi from "../../axios/PerformanceAxios";
+import PerformanceAxios from "../../axios/PerformanceAxios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, UserInfo, UpdateZone, InputBox, Button } from "../../style/performance/PerformanceUpdateStyle";
@@ -46,7 +46,7 @@ const PerformanceUpdate = () => {
     // 컴포넌트가 마운트될 때 모든 회원정보를 불러옵니다.
     const fetchUserList = async () => {
         try {
-            const response = await AxiosApi.getUserList();
+            const response = await PerformanceAxios.getUserList();
             setUserList(response.data);
         } catch (error) {
             console.error('Error fetching performance list', error);

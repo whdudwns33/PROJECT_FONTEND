@@ -1,5 +1,5 @@
 import MainAxios from "../../axios/MainAxios";
-import AxiosApi from "../../axios/PerformanceAxios";
+import PerformanceAxios from "../../axios/PerformanceAxios";
 import { UserInfo, Button } from "../../style/performance/PerformanceUpdateStyle";
 import { useEffect, useState } from "react";
 
@@ -17,7 +17,7 @@ const UpdateUserInfo = ({ userList }) => {
   useEffect(() => {
     const fetchPerformerList = async () => {
       try {
-        const response = await AxiosApi.getPerformerList(); // 퍼포머 정보를 가져옵니다.
+        const response = await PerformanceAxios.getPerformerList(); // 퍼포머 정보를 가져옵니다.
         setPerformerList(response.data); // 퍼포머 정보를 상태에 저장합니다.
         console.log("전체공연자조회결과: ", response.data);
       } catch (error) {

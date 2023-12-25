@@ -53,9 +53,9 @@ function App() {
               element={<CommunityPage></CommunityPage>}
             />
             <Route path="/mypage" element={<MyPage></MyPage>} />
-            {/* <Route path="/shop" element={<ShopPage></ShopPage>} /> */}
-            {/* <Route path="/product" element={<ProductPage></ProductPage>} /> */}
-            {/* <Route path="/cart" element={<CartPage></CartPage>} /> */}
+            <Route path="/shop" element={<ShopPage></ShopPage>} /> */}
+            <Route path="/product" element={<ProductPage></ProductPage>} />
+            <Route path="/cart" element={<CartPage></CartPage>} />
             <Route path="/findemail" element={<FindEmail></FindEmail>} />
             <Route
               path="/findpassword"

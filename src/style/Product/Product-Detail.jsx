@@ -89,10 +89,12 @@ export const TotalAmount = styled.div`
 export const BtnShape = styled.div`
   display: flex;
   padding: 10px;
+  width: 100%;
+  height: 15%;
 
 `;
 export const ClickBtn = styled.button`
-  border-radius: 15px;
+  border-radius: 5px;
   border: none;
   background-color: #333;
   color: #fff; 
@@ -100,4 +102,5 @@ export const ClickBtn = styled.button`
   font-weight: 700;
   padding: 5px 10px;
   margin: 3px 3px;
+  width: 100%;
 `;

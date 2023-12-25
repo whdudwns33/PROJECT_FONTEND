@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MainAxios from "../../axios/MainAxios";
 import styled from "styled-components";
+import Heart from "../../images/HeartBox.svg";
+// import a from "../../images/musicplay.gif";
 
 const Container = styled.div`
   width: 100%;
@@ -12,32 +14,48 @@ const Container = styled.div`
 `;
 
 const Main = styled.div`
-  width: 80%;
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
 
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.08);
 `;
 
 const Contents = styled.div`
   width: 100%;
   height: 10%;
-  border: 3px solid red;
   display: flex;
   /* flex-wrap: wrap; */
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
+  box-shadow: inset -0.5px -9.5px 15px 0.5px rgba(0, 0, 0, 0.3);
 `;
 
 const Content = styled.div`
-  width: 10%;
+  width: ${(props) => props.width || "10%"};
   color: white;
   font-size: 1.3rem;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+
   @media (max-width: 768px) {
     font-size: 1rem;
   }
+`;
+
+const HeartTag = styled.div`
+  background-image: url(${Heart});
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const HeartSong = () => {
@@ -75,16 +93,36 @@ const HeartSong = () => {
         <Main>
           {list.map((data, index) => (
             <Contents key={index}>
-              <Content onDoubleClick={onClick}>{index + 1}</Content>
-              <Content onDoubleClick={onClick}>
-                {data.musicDTO.musicTitle}
+              {/* <Content onDoubleClick={onClick}>{index + 1}</Content> */}
+              <img
+                src={data.musicDTO.thumbnailImage}
+                alt="썸네일"
+                style={{ width: "30px", height: "30px", borderRadius: "50%" }}
+              />
+              <Content width="15%" onDoubleClick={onClick}>
+                <h1 style={{ lineHeight: "0", fontSize: "1.5rem" }}>
+                  {data.musicDTO.musicTitle}
+                </h1>
+                <p style={{ lineHeight: "0" }}>
+                  by: {data.userResDto.userNickname}
+                </p>
               </Content>
-              <Content onDoubleClick={onClick}></Content>
-              <Content onDoubleClick={onClick}>
-                {data.userResDto.userNickname}
+              {/* <Content onDoubleClick={onClick} width="20%">
+                <img
+                  src={a}
+                  alt="음악 실행"
+                  style={{ width: "30px", height: "30px" }}
+                />
+              </Content> */}
+              <Content width="20%" onDoubleClick={onClick}>
+                {data.musicDTO.genre}
               </Content>
-              <Content onDoubleClick={onClick}>{data.musicDTO.genre}</Content>
-              <Content>좋아요 수 :{data.musicDTO.heartCount}</Content>
+              <Content width="20%" style={{ color: "#00FFA8" }}>
+                {data.musicDTO.releaseDate}
+              </Content>
+              <Content>
+                <HeartTag>{data.musicDTO.heartCount}</HeartTag>
+              </Content>
             </Contents>
           ))}
         </Main>

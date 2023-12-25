@@ -20,7 +20,7 @@ import MyPage from "./pages/MyPage";
 // import ProductPage from "./pages/Product/ProductPage";
 // import OrderFormPage from "./pages/Product/OrderFormPage";
 import Test from "./pages/SimpleTest";
-// import AdminPage from "./pages/AdminPage";
+import AdminPage from "./pages/AdminPage";
 import { CartProvider } from "./context/CartContext";
 import FindEmail from "./pages/FindEmail";
 import FindPassword from "./pages/FindPassword";
@@ -61,6 +61,7 @@ function App() {
               path="/findpassword"
               element={<FindPassword></FindPassword>}
             />
+            <Route path="/admin" element={<AdminPage></AdminPage>} />
 
             <Route path="/test" element={<Test></Test>} />
           </Routes>

@@ -27,6 +27,20 @@ const MainAxios = {
     return await axios.get(CHORD8_DOMAIN + "/main/likeSong");
   },
 
+  // 성별 + 좋아요
+  genderHeart: async () => {
+    const accessToken = Common.getAccessToken();
+    return await axios.get(
+      CHORD8_DOMAIN + `/main/gender?token=${accessToken}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + accessToken,
+        },
+      }
+    );
+  },
+
   // 테스트
   // 토큰 테스트
   testGet: async (token) => {

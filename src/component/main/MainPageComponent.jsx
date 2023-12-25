@@ -70,7 +70,6 @@ export const P3 = styled.p`
 `;
 
 export const Advertisement = styled.div`
-  border: 3px solid red;
   width: 100%;
   height: 16%;
   @media (max-width: 768px) {
@@ -89,7 +88,6 @@ export const MusicRankTitle = styled.div`
 `;
 // 50
 export const MusicRank = styled.div`
-  border: 3px solid red;
   width: 100%;
   height: 20%;
 `;

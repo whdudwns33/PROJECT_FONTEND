@@ -1,17 +1,29 @@
 import styled from "styled-components";
+import b from "../../images/Band.jpg";
 
 export const MainContainer = styled.div`
   width: 100%;
-  height: 400vh;
+  height: 500vh;
   @media (max-width: 768px) {
     min-width: 380px;
   }
 `;
 
+export const TopContainer = styled.div`
+  display: flex;
+  width: 100%;
+  height: 80vh;
+  justify-content: center;
+  align-items: center;
+  background-image: url(${b});
+  background-repeat: no-repeat;
+  background-size: cover;
+`;
+
 export const Main = styled.div`
   margin: 0 auto;
   width: 60%;
-  height: 100%;
+  height: 84%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -37,7 +49,7 @@ export const TopText = styled.div`
   }
 `;
 export const P1 = styled.p`
-  font-size: 4rem;
+  font-size: ${(props) => props.fontSize || "4rem"};
   width: 80%;
   text-align: center;
   color: #82ccff;
@@ -45,8 +57,9 @@ export const P1 = styled.p`
   text-shadow: 0px 8px 4px rgba(97, 230, 202, 0.25);
 `;
 export const P2 = styled.p`
-  font-size: 2rem;
-  font-weight: 500;
+  font-size: ${(props) => props.fontSize || "2rem"};
+  font-weight: ${(props) => props.fontWeight || "500"};
+  color: ${(props) => props.color || "black"};
   line-height: 0;
   @media (max-width: 768px) {
     font-size: 1.5rem;
@@ -61,10 +74,10 @@ export const Artist = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: space-evenly; */
 `;
+
 export const P3 = styled.p`
-  font-size: 2rem;
+  font-size: ${(props) => props.fontSize || "2rem"};
   line-height: 0;
   font-weight: 900;
 `;

@@ -41,7 +41,6 @@ const Contents = styled.div`
 `;
 
 const Content = styled.div`
-  border: 1px solid gray;
   border-radius: 20px;
   margin: 0 auto;
   width: 90%;
@@ -52,6 +51,7 @@ const Content = styled.div`
   background-position: center;
   cursor: pointer;
   overflow: hidden;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
 `;
 
 const Text = styled.div`

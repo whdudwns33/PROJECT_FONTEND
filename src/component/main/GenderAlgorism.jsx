@@ -24,13 +24,15 @@ const Nologin = styled.div`
 const Contents = styled.div`
   width: 100%;
   height: 100%;
+  /* background-color: blue; */
 `;
 
 const Content = styled.div`
   border-radius: 20px;
   margin: 0 auto;
-  width: 80%;
-  height: 50vh;
+  width: 800px;
+  height: 600px;
+  box-shadow: 0px 10px 25px -5px rgba(0, 0, 0, 0.25);
 
   background-image: ${(props) => `url(${props.imagePath})`};
   background-repeat: no-repeat;

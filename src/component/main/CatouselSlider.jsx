@@ -20,7 +20,6 @@ const Contents = styled.div`
 `;
 
 const Content = styled.div`
-  border: 2px solid #61e6ca;
   margin: 0 auto;
   width: 90%;
   height: 90%;
@@ -30,6 +29,7 @@ const Content = styled.div`
   background-position: center;
   cursor: pointer;
   overflow: hidden;
+  border-radius: 20px;
 `;
 
 const Text = styled.div`

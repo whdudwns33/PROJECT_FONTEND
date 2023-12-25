@@ -29,7 +29,7 @@ const Content = styled.div`
   background-position: center;
   cursor: pointer;
   overflow: hidden;
-  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
 `;
 
 const Text = styled.div`

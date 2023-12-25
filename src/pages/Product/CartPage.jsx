@@ -24,12 +24,12 @@ const CartPage = (quantity, totalprice) => {
     const { cart, updateQuantity, removeFromCart } = useCart(); // 전역 장바구니 상태 사용
 
     // 총 수량과 총 가격 계산
-    const total = cart.reduce((acc, item) => {
-        return {
-            totalQuantity: acc.totalQuantity + item.quantity,
-            totalPrice: acc.totalPrice + item.totalPrice
-        };
-    }, { totalQuantity: 0, totalPrice: 0 });
+    // const total = cart.reduce((acc, item) => {
+    //     return {
+    //         totalQuantity: acc.totalQuantity + item.quantity,
+    //         totalPrice: acc.totalPrice + item.totalPrice
+    //     };
+    // }, { totalQuantity: 0, totalPrice: 0 });
 
     // 수량 변경 처리 함수
     const handleQuantityChange = (productId, newQuantity) => {
@@ -93,7 +93,7 @@ const CartPage = (quantity, totalprice) => {
                     <TotalOrder>총 상품 금액</TotalOrder>
                     <TotalOrder>{calculateTotal().toLocaleString()}원</TotalOrder>
                 </TotalContainer>
-                <CheckoutButton onClick={handleCheckout}>주문하기</CheckoutButton>
+                <CheckoutButton onClick={handleCheckout}>주문하러가기</CheckoutButton>
                 </div>
             </SummaryContainer>
         </CartLayout>

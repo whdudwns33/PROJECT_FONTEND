@@ -15,10 +15,10 @@ import MusicRegistPage from "./pages/musicPage/MusicRegistPage";
 import MusicList from "./pages/musicPage/MusicListPage";
 import CommunityPage from "./pages/CommunityPage";
 import MyPage from "./pages/MyPage";
-// import ShopPage from "./pages/Shop/ShopPage";
-// import CartPage from "./pages/Product/CartPage";
-// import ProductPage from "./pages/Product/ProductPage";
-// import OrderFormPage from "./pages/Product/OrderFormPage";
+import ShopPage from "./pages/Shop/ShopPage";
+import CartPage from "./pages/Product/CartPage";
+import ProductPage from "./pages/Product/ProductPage";
+import OrderFormPage from "./pages/Product/OrderFormPage";
 import Test from "./pages/SimpleTest";
 import AdminPage from "./pages/AdminPage";
 import { CartProvider } from "./context/CartContext";
@@ -53,9 +53,12 @@ function App() {
               element={<CommunityPage></CommunityPage>}
             />
             <Route path="/mypage" element={<MyPage></MyPage>} />
-            {/* <Route path="/shop" element={<ShopPage></ShopPage>} /> */}
-            {/* <Route path="/product" element={<ProductPage></ProductPage>} /> */}
-            {/* <Route path="/cart" element={<CartPage></CartPage>} /> */}
+            <Route path="/shop" element={<ShopPage></ShopPage>} /> 
+            <Route path="/product" element={<ProductPage></ProductPage>} />
+            <Route path="/cart" element={<CartPage></CartPage>} />
+            
+            <Route path="/orderform" element={<OrderFormPage></OrderFormPage>} />
+            <Route path="/product" element={<ProductPage></ProductPage>} />
             <Route path="/findemail" element={<FindEmail></FindEmail>} />
             <Route
               path="/findpassword"

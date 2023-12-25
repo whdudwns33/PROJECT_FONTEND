@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation} from 'react-router-dom';
 import {
     Container,
     OrderContainer,
@@ -9,7 +9,7 @@ import {
     OrdererName,
     OrdererAddr,
     OrdererPoint,
-    OrdererInput,
+
     OrderInput,
     OrderBtn,
     PayBtn,
@@ -20,8 +20,7 @@ const OrderFormPage = () => {
     const location = useLocation();
     const { cart, totalAmount } = location.state || {};
     const [ userPoints, setUserPoints] = useState(0); // 사용자 포인트
-    const [ pointsToUse, setPointsToUse ] = useState(0);
-    const { productName, quantity, totalPrice } = location.state || {};
+    const { productName, quantity } = location.state || {};
 
     // 총 수량 계산
     const totalQuantity = cart ? cart.reduce((acc, item) => acc + item.quantity, 0) : 0;
@@ -41,13 +40,14 @@ const OrderFormPage = () => {
     useEffect(() => {
         fetchUserPoints();
     }, []);
-    const finalAmount = totalAmount - pointsToUse;
+    
+    
     // 결제 페이지로 이동하는 함수
     const handlePayment = async() => {
         
         try {
-            const res = await Axios.doPurchase(finalAmount);
-            console.log("point cal : ", finalAmount)
+            const res = await Axios.doPurchase(totalAmount);
+            console.log("point cal : ", totalAmount)
             console.log("결제 결과 : ", res);
             if(res.data === true) {
                 alert("결제가 완료되었습니다.");
@@ -59,7 +59,6 @@ const OrderFormPage = () => {
         } catch (error) {
             console.error("결제 처리 중 에러 발생", error);
         }
-        // navigate('/purchase', { state: { cart, totalAmount, totalQuantity }});
     };
 
     return (

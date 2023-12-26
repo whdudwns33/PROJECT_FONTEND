@@ -68,6 +68,22 @@ const SignUpAxios = {
     return await axios.post(CHORD8_DOMAIN + "/auth/addmin", login);
   },
 
+  // 어드민 체크
+  checkAddmin: async () => {
+    const accessToken = Common.getAccessToken();
+    console.log("로그인 상태 체크의 엑세스 토큰 : ", accessToken);
+    // 인터셉터 자체로 리프레쉬 토큰 체크가 있으므로 로그인 체크는 axios를 활용
+    return await axios.get(
+      CHORD8_DOMAIN + `/user/isAdmin?accessToken=${accessToken}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + accessToken,
+        },
+      }
+    );
+  },
+
   // 닉네임 중복 체크
   memberNickname: async (nickname) => {
     return await axios.get(

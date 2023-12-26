@@ -129,19 +129,14 @@ const LoginPage = () => {
       const res = await SignUpAxios.addminLogin(inputEmail, inputPw);
       console.log("로그인 정보 : ", res.data);
       if (res.data.grantType === "Bearer") {
-        // 엑세스 토큰 저장
-        // console.log("AccessToken : ", res.data.accessToken);
         const accessToken = res.data.accessToken;
         window.localStorage.setItem("accessToken", accessToken);
-        // 리프레쉬 토큰 저장
-        // console.log("Refreshtoken : ", res.data.refreshToken);
         const refreshToken = res.data.refreshToken;
-        // console.log("토큰의 id:", res.data.accessToken.name);
         window.localStorage.setItem("refreshToken", refreshToken);
         window.localStorage.setItem("admin", "admin");
         alert("관리자 로그인 성공");
         // 로그인 성공 시 메인 페이지로 이동
-        navigate("/");
+        navigate("/admin");
       } else {
         alert("입력 정보를 확인하시오.");
       }

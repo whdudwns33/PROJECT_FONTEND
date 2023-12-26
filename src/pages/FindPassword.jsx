@@ -10,7 +10,7 @@ import SignUpAxios from "../axios/SignUpAxios";
 
 const FindPassword = () => {
   const [isTrue, setIsTrue] = useState(false);
-  const [isNick, setIsNick] = useState(true);
+  const [isNick, setIsNick] = useState(false);
   // 전화 번호 인증
   const [tel, setTel] = useState("");
   const onChangeTel = (e) => {

@@ -9,6 +9,7 @@ import commentimg01 from "../../images/postimg03.jpg";
 import ReactAudioPlayer from "react-audio-player";
 import MusicAxiosApi from "../../axios/MusicAxios";
 import { Link } from "react-router-dom";
+import ModalComponent from "../../component/MusicList/MusicPurchaseModal";
 
 const BackgroundContainer = styled.div`
   width: 100%;
@@ -860,7 +861,7 @@ const MusicInfo = () => {
     musicCommentList();
   }, [id, inputComment]);
 
-  const loggedInUserId = window.localStorage.getItem("userId");
+  const loggedInUserId = window.localStorage.getItem("email");
   //음악 댓글 삭제
   const handleDeleteComment = async (musicCommentId) => {
     try {
@@ -958,6 +959,34 @@ const MusicInfo = () => {
     setVolume(newVolume);
   };
 
+  //음악 구매 기능
+  const musicPurchaser = window.localStorage.getItem("email");
+  const [modalOpen, setModalopen] = useState(false);
+
+  const handlePurchaseClick = () => {
+    setModalopen(true);
+  };
+
+  const handleConfirm = async () => {
+    try {
+      console.log("", id);
+      const response = await MusicAxiosApi.purchaseMusic(id);
+      console.log("음악 구매 성공 여부 : ", response.data);
+      if (response.data === true) {
+        alert("구매를 완료했습니다");
+        setModalopen(false); // 모달 닫기}
+      } else {
+        alert("구매를 실패했습니다");
+      }
+    } catch (error) {
+      console.log("음악 구매 실패", error);
+    }
+  };
+
+  const handleCancel = () => {
+    setModalopen(false); // 모달 닫기
+  };
+
   return (
     <BackgroundContainer>
       <InfoContainer>
@@ -999,9 +1028,20 @@ const MusicInfo = () => {
                 </MusicLikeBox>
 
                 <PlayBox onClick={handlePlayClick}>▶</PlayBox>
-                <BuyBox>
+
+                {/* 음원구매버튼 */}
+
+                <BuyBox onClick={handlePurchaseClick}>
                   <BuyImg alt="장바구니아이콘" src={buyimg} />
                 </BuyBox>
+                {modalOpen && (
+                  <ModalComponent>
+                    <p>구매시 100포인트가 차감됩니다.</p>
+                    <button onClick={handleConfirm}>확인</button>
+                    <button onClick={handleCancel}>취소</button>
+                  </ModalComponent>
+                )}
+
                 <ReactAudioPlayer
                   ref={audioPlayerRef}
                   src={audioSrc}
@@ -1106,18 +1146,18 @@ const MusicInfo = () => {
                       <Commenttext> "{comment.content}"</Commenttext>
 
                       {/* 댓글 작성자의 ID와 현재 로그인한 사용자의 ID 비교하여 삭제 버튼을 표시하거나 숨김.
-   삭제 버튼은 댓글 작성자와 현재 로그인한 사용자의 ID가 일치할 때만. */}
+                      삭제 버튼은 댓글 작성자와 현재 로그인한 사용자의 ID가 일치할 때만. */}
                       <CommentDeleteButton
                         style={{
                           display:
-                            comment.userId === loggedInUserId
+                            comment.userEmail === loggedInUserId
                               ? "block"
                               : "none",
                         }}
                         onClick={() =>
                           handleDeleteComment(
                             comment.musiccommentId,
-                            comment.userId
+                            comment.userEmail
                           )
                         }
                       >

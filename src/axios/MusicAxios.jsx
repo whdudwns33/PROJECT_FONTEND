@@ -124,6 +124,29 @@ const MusicAxiosApi = {
     );
   },
 
+  //음악 구매
+  purchaseMusic: async (musicId) => {
+    const accessToken = localStorage.getItem("accessToken");
+
+    console.log("음악 구매 AxiosApi 작동", accessToken);
+    const musicpurchase = {
+      musicDTO: {
+        id: musicId,
+      },
+      token: accessToken,
+    };
+    return await Interceptor.post(
+      CHORD8_DOMAIN + `/music/purchase`,
+      musicpurchase,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + accessToken,
+        },
+      }
+    );
+  },
+
   //음악 페이지 수 조회
 
   getMusicPage: async (page, size) => {

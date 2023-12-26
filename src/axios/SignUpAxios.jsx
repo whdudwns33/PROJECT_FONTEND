@@ -59,6 +59,15 @@ const SignUpAxios = {
     return await axios.post(CHORD8_DOMAIN + "/auth/login", login);
   },
 
+  // 어드민 로그인
+  addminLogin: async (email, password) => {
+    const login = {
+      userEmail: email,
+      userPassword: password,
+    };
+    return await axios.post(CHORD8_DOMAIN + "/auth/addmin", login);
+  },
+
   // 닉네임 중복 체크
   memberNickname: async (nickname) => {
     return await axios.get(

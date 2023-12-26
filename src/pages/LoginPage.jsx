@@ -122,6 +122,34 @@ const LoginPage = () => {
     }
   };
 
+  const onClickAddminLogin = async () => {
+    // 로컬 스토리지 비우기
+    window.localStorage.clear();
+    try {
+      const res = await SignUpAxios.addminLogin(inputEmail, inputPw);
+      console.log("로그인 정보 : ", res.data);
+      if (res.data.grantType === "Bearer") {
+        // 엑세스 토큰 저장
+        // console.log("AccessToken : ", res.data.accessToken);
+        const accessToken = res.data.accessToken;
+        window.localStorage.setItem("accessToken", accessToken);
+        // 리프레쉬 토큰 저장
+        // console.log("Refreshtoken : ", res.data.refreshToken);
+        const refreshToken = res.data.refreshToken;
+        // console.log("토큰의 id:", res.data.accessToken.name);
+        window.localStorage.setItem("refreshToken", refreshToken);
+        window.localStorage.setItem("admin", "admin");
+        alert("관리자 로그인 성공");
+        // 로그인 성공 시 메인 페이지로 이동
+        navigate("/");
+      } else {
+        alert("입력 정보를 확인하시오.");
+      }
+    } catch (error) {
+      alert("네트 워크 연결이 불안정합니다.");
+    }
+  };
+
   return (
     <>
       <Container>
@@ -200,6 +228,20 @@ const LoginPage = () => {
                   <div className="signup-img" onClick={onClickTosign}></div>
                 </SignUpButton>
               </div>
+            </div>
+            <div
+              style={{
+                position: "absolute",
+                left: "50%",
+                opacity: "0.5",
+              }}
+            >
+              <button
+                onClick={onClickAddminLogin}
+                style={{ cursor: "pointer" }}
+              >
+                관리자
+              </button>
             </div>
           </LoginSginup>
         </BACKGROUND>

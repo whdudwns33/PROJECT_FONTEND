@@ -68,7 +68,25 @@ setPerformance: async (performance) => {
       const accessToken = Common.getAccessToken();
       console.log("공연삭제 AxiosApi 작동")
       return await Interceptor.delete(
-        CHORD8_DOMAIN + `/performance/delete/${performanceId}`, {
+        CHORD8_DOMAIN + `/performance/delete/${performanceId}`, { 
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + accessToken,
+          },
+        }
+      );
+    },
+
+    //공연 구매
+    purchaseTicket: async (performanceId, userId, price) => {
+      const accessToken = Common.getAccessToken();
+      console.log("공연구매 AxiosApi 작동")
+      return await Interceptor.post(
+        CHORD8_DOMAIN + `/ticketer/new/${performanceId}`, {
+          performanceId,
+          userId,
+          price
+        },{
           headers: {
             "Content-Type": "application/json",
             Authorization: "Bearer " + accessToken,

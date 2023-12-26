@@ -1,4 +1,4 @@
-import PerformanceAxios from "../../axios/PerformanceAxios";
+import AxiosApi from "../../axios/PerformanceAxios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import PerformanceCardView from "./PerformanceCardView";
@@ -55,7 +55,7 @@ const PerformanceList = ({ performanceList, onCardMouseOver }) => {
       try {
         console.log("performanceList 총페이지수계산 시도");
         console.log(performanceList);
-        const res = await PerformanceAxios.getPerformancePage(0, 5);
+        const res = await AxiosApi.getPerformancePage(0, 5);
         setTotalPage(res.data);
       } catch (error) {
         console.log(error);

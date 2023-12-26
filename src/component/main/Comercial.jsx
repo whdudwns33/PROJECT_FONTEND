@@ -49,6 +49,13 @@ const Text = styled.div`
     line-height: 0;
     margin-left: 5%;
   }
+
+  .venue {
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1;
+    margin-left: 5%;
+  }
 `;
 const Comercial = () => {
   const usenavigate = useNavigate();
@@ -90,7 +97,7 @@ const Comercial = () => {
                   <span key={index}>{nickname} </span>
                 ))}
               </p>
-              <p className="text">{data.venue}</p>
+              <p className="venue">{data.venue}</p>
             </Text>
           </Content>
         </Contents>

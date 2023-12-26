@@ -43,6 +43,53 @@ export const TopText = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  .text-top {
+    color: #82ccff;
+    font-size: 7rem;
+    font-weight: 900;
+    text-shadow: 0px 8px 4px rgba(97, 230, 202, 0.25);
+    text-align: center;
+    width: 80%;
+    line-height: 1;
+    @media (max-width: 1200px) {
+      font-size: 4rem;
+    }
+    @media (max-width: 768px) {
+      font-size: 3.5rem;
+    }
+  }
+
+  .text-main {
+    line-height: 0;
+    font-size: 5rem;
+    color: #61e6ca;
+    font-weight: 600;
+    text-align: center;
+
+    @media (max-width: 1200px) {
+      font-size: 2rem;
+    }
+    @media (max-width: 768px) {
+      font-size: 2rem;
+    }
+  }
+
+  .text-bottom {
+    font-size: 4rem;
+    color: white;
+    text-align: center;
+    line-height: 1;
+    margin: 0;
+
+    @media (max-width: 1200px) {
+      font-size: 2.5rem;
+    }
+    @media (max-width: 768px) {
+      font-size: 2rem;
+    }
+  }
+
   @media (max-width: 768px) {
     width: 380px;
     height: 20%;

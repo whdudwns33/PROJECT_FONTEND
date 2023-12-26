@@ -6,15 +6,20 @@ import SignUpAxios from "../axios/SignUpAxios";
 const AdminPage = () => {
   const [selectedButton, setSelectedButton] = useState("User");
   const useanvigate = useNavigate();
-  const admin = window.localStorage.getItem("admin");
 
   useEffect(() => {
     const isAdmin = async () => {
       const res = await SignUpAxios.checkAddmin();
       console.log("어드민?", res);
+      if (res.data === true) {
+        alert("관리자님, 안녕하세요!");
+      } else {
+        window.localStorage.clear();
+        useanvigate("/");
+      }
     };
     isAdmin();
-  }, [admin]);
+  }, [useanvigate]);
   return (
     <>
       <Container>

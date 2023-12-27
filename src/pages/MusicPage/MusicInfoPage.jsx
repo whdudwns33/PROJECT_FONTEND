@@ -4,13 +4,11 @@ import styled, { css, keyframes } from "styled-components";
 import likeheart from "../../images/Heart.png";
 import buyimg from "../../images/Basket.png";
 import artistImg from "../../images/Artist_2.png";
-import commentimg from "../../images/postimg05.jpg";
-import commentimg01 from "../../images/postimg03.jpg";
 import commentsend from "../../images/commentsend.png";
 import ReactAudioPlayer from "react-audio-player";
 import MusicAxiosApi from "../../axios/MusicAxios";
 import { Link } from "react-router-dom";
-import ModalComponent from "../../component/musicList/MusicPurchaseModal";
+import ModalComponent from "../../component/MusicList/MusicPurchaseModal";
 
 const BackgroundContainer = styled.div`
   width: 100%;

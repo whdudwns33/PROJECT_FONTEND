@@ -1,7 +1,7 @@
 import AxiosApi from "../../axios/PerformanceAxios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import PerformanceCardView from "./PerformerCardView";
+import PerformanceCardView from "./PerformanceCardView";
 
 const CardContainer = styled.div`
   display: flex;
@@ -96,7 +96,7 @@ const PerformanceList = ({ performanceList, onCardMouseOver }) => {
               image={performance.performanceImage}
               title={performance.performanceName}
               venue={performance.venue}
-              performer={performance.nicknames}
+              performer={[performance.nicknames]}
               date={performance.performanceDate}
               onMouseOver={onCardMouseOver}
             />

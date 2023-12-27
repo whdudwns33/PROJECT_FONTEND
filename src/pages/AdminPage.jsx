@@ -2,11 +2,17 @@ import { useEffect, useState } from "react";
 import { Container, SideMenu, InfoBox } from "../style/AdminStyle";
 import { useNavigate } from "react-router-dom";
 import SignUpAxios from "../axios/SignUpAxios";
+import UserList from "../component/admin/UserList";
 
 const AdminPage = () => {
   const [selectedButton, setSelectedButton] = useState("User");
   const useanvigate = useNavigate();
 
+  const onClick = () => {
+    setSelectedButton(selectedButton + "Graph");
+  };
+
+  // 관리자 체크
   useEffect(() => {
     const isAdmin = async () => {
       const res = await SignUpAxios.checkAddmin();
@@ -20,6 +26,7 @@ const AdminPage = () => {
     };
     isAdmin();
   }, [useanvigate]);
+
   return (
     <>
       <Container>
@@ -88,12 +95,14 @@ const AdminPage = () => {
                 </button>
               </div>
               <div className="buttonzone">
-                <button>Graph</button>
+                <button onClick={onClick}>Graph</button>
                 <button>Filter</button>
               </div>
             </div>
           </div>
-          <div className="info"></div>
+          <div className="info">
+            <UserList selectedButton={selectedButton}></UserList>
+          </div>
         </InfoBox>
       </Container>
     </>

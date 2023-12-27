@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-
+import FooterContext from "../../context/FooterContext";
 import Searchicon from "../../images/SearchIcon.png";
 import Waveform from "../../component/MusicList/MusicPlayer";
 import { Link } from "react-router-dom";

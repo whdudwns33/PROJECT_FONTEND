@@ -54,6 +54,16 @@ const Text = styled.div`
   }
 `;
 
+const Title = styled.p`
+  display: flex;
+  justify-content: center;
+  color: #61e6ca;
+  font-size: 4rem;
+  line-height: 0;
+  font-weight: 900;
+  text-shadow: 0px 8px 4px rgba(97, 230, 202, 0.25);
+`;
+
 const Gender = (useAuth) => {
   //   console.log("useAuth의 값: ", useAuth.useAuth);
 
@@ -117,22 +127,25 @@ const Gender = (useAuth) => {
         </Nologin>
       )}
       {useAuth.useAuth && (
-        <Slider {...settings}>
-          {list.map((data, index) => (
-            <Contents key={index}>
-              <Content
-                onDoubleClick={() => onClick(data.musicDTO.id)}
-                imagePath={data.musicDTO.thumbnailImage}
-              ></Content>
-              <Text>
-                {/* <p className="text">{data.musicDTO.releaseDate}</p> */}
-                <p className="text">{data.userResDto.userNickname}</p>
-                <p className="text">{data.musicDTO.genre}</p>
-                <p className="text">{data.musicDTO.releaseDate}</p>
-              </Text>
-            </Contents>
-          ))}
-        </Slider>
+        <>
+          <Title>AI 추천!!</Title>
+          <Slider {...settings}>
+            {list.map((data, index) => (
+              <Contents key={index}>
+                <Content
+                  onDoubleClick={() => onClick(data.musicDTO.id)}
+                  imagePath={data.musicDTO.thumbnailImage}
+                ></Content>
+                <Text>
+                  {/* <p className="text">{data.musicDTO.releaseDate}</p> */}
+                  <p className="text">{data.userResDto.userNickname}</p>
+                  <p className="text">{data.musicDTO.genre}</p>
+                  <p className="text">{data.musicDTO.releaseDate}</p>
+                </Text>
+              </Contents>
+            ))}
+          </Slider>
+        </>
       )}
     </>
   );

@@ -8,7 +8,7 @@ import commentsend from "../../images/commentsend.png";
 import ReactAudioPlayer from "react-audio-player";
 import MusicAxiosApi from "../../axios/MusicAxios";
 import { Link } from "react-router-dom";
-import ModalComponent from "../../component/MusicList/MusicPurchaseModal";
+import ModalComponent from "../../component/musicList/MusicPurchaseModal";
 import FooterContext from "../../context/FooterContext";
 import { useContext } from "react";
 

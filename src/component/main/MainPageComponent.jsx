@@ -6,6 +6,8 @@ export const MainContainer = styled.div`
   height: 500vh;
   @media (max-width: 768px) {
     min-width: 380px;
+    min-height: 4000px;
+    border: 3px solid red;
   }
 `;
 
@@ -118,11 +120,14 @@ export const P2 = styled.p`
 // 최상단 추천 알고리즘
 export const Artist = styled.div`
   width: 100%;
-  height: 16%;
+  height: 14%;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 10%;
+  @media (max-width: 768px) {
+    height: 10%;
+  }
 `;
 
 export const P3 = styled.p`

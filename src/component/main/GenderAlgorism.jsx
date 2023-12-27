@@ -24,7 +24,6 @@ const Nologin = styled.div`
 const Contents = styled.div`
   width: 100%;
   height: 100%;
-  /* background-color: blue; */
 `;
 
 const Content = styled.div`
@@ -40,6 +39,14 @@ const Content = styled.div`
   background-position: center;
   cursor: pointer;
   overflow: hidden;
+
+  @media (max-width: 1400px) {
+    height: 500px;
+  }
+
+  @media (max-width: 768px) {
+    height: 400px;
+  }
 `;
 
 const Text = styled.div`

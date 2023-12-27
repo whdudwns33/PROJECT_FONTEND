@@ -10,7 +10,7 @@ const Container = styled.div`
   /* border: 3px solid black; */
   height: 80%;
   width: 100%;
-  margin-top: 3%;
+  margin-top: 5%;
 `;
 
 const Contents = styled.div`
@@ -30,6 +30,10 @@ const Content = styled.div`
   cursor: pointer;
   overflow: hidden;
   border-radius: 20px;
+
+  @media (max-width: 768px) {
+    height: 300px;
+  }
 `;
 
 const Text = styled.div`

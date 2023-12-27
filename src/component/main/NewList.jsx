@@ -10,7 +10,10 @@ const Container = styled.div`
   /* border: 3px solid black; */
   height: 90%;
   width: 100%;
-  margin-top: 3%;
+  margin-top: 10%;
+  @media (max-width: 768px) {
+    margin-top: 20%;
+  }
 `;
 
 const Title = styled.div`

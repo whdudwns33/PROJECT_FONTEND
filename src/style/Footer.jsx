@@ -15,12 +15,12 @@ const FooterBox = styled.div`
   align-items: center;
 `;
 const ContentGroup = styled.div`
-width: 30%;
+  width: 30%;
   height: 50%;
   display: flex;
   justify-content: space-between;
-`
-  
+`;
+
 const FooterLogo = styled.div`
   width: 30%;
   height: 24.13rem;
@@ -28,30 +28,29 @@ const FooterLogo = styled.div`
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-`
+`;
 const Content = styled.div`
   background-color: balck;
   width: 30%;
   height: 20rem;
-`
+`;
 
 const TextWrapper = styled.div`
   color: white;
   font-size: 1.5rem;
   font-weight: 300;
 
-  h1{
+  h1 {
     font-size: 1.8rem;
     font-weight: 500;
   }
-`
-
+`;
 
 const Footer = () => {
   return (
     <>
       <FooterBox>
-        <FooterLogo/>
+        <FooterLogo />
         <ContentGroup>
           <Content>
             <TextWrapper>
@@ -65,7 +64,7 @@ const Footer = () => {
           </Content>
           <Content>
             <TextWrapper>
-            <h1>CONTENT GROUP</h1>
+              <h1>CONTENT GROUP</h1>
               <p>CONTENT</p>
               <p>CONTENT</p>
               <p>CONTENT</p>
@@ -75,7 +74,7 @@ const Footer = () => {
           </Content>
           <Content>
             <TextWrapper>
-            <h1>CONTENT GROUP</h1>
+              <h1>CONTENT GROUP</h1>
               <p>CONTENT</p>
               <p>CONTENT</p>
               <p>CONTENT</p>
@@ -84,9 +83,9 @@ const Footer = () => {
             </TextWrapper>
           </Content>
         </ContentGroup>
-      </FooterBox> 
+      </FooterBox>
     </>
-    )
-  };
+  );
+};
 
 export default Footer;

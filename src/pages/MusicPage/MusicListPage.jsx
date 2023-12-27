@@ -512,6 +512,32 @@ const MusicList = () => {
   const [promoImages, setPromoImages] = useState([]);
   const [selectedGenre, setSelectedGenre] = useState(null);
 
+  //아이콘 저작권 링크.
+  const { setFooterData } = useContext(FooterContext);
+
+  useEffect(() => {
+    setFooterData(
+      <a
+        href="https://www.flaticon.com/free-animated-icons/pause"
+        title="pause animated icons"
+      >
+        Pause animated icons created by Freepik - Flaticon
+      </a>,
+      <a
+        href="https://www.flaticon.com/free-animated-icons/music"
+        title="music animated icons"
+      >
+        Music animated icons created by Freepik - Flaticon
+      </a>,
+      <a
+        href="https://www.flaticon.com/free-icons/magnifying-glass"
+        title="magnifying glass icons"
+      >
+        Magnifying glass icons created by Smashicons - Flaticon
+      </a>
+    );
+  }, []);
+
   //카테고리별 검색
   // 기존 음악 카테고리 클릭 이벤트 핸들러에서 선택된 장르를 설정하는 함수
   const handleGenreClick = (genre) => {

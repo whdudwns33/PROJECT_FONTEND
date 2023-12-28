@@ -1,6 +1,17 @@
 import styled from "styled-components";
-import PerformanceAxios from "../../axios/PerformanceAxios";
-import { useState, useEffect } from "react";
+import { PieChart } from "react-minimal-pie-chart";
+import React, { PureComponent } from "react";
+import {
+  BarChart,
+  Bar,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 
 const Table = styled.table`
   border-collapse: collapse;
@@ -25,28 +36,49 @@ const Td = styled.td`
   overflow: hidden;
 `;
 
-const UserList = ({ selectedButton }) => {
-  //   console.log("회원 리스트 등장 : ", selectedButton);
-  const [userList, setUserList] = useState([]);
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
 
-  // getUserList 함수를 selectedButton이 "User"일 때만 호출합니다.
-  const fetchData = async () => {
-    try {
-      if (selectedButton === "User") {
-        const res = await PerformanceAxios.getUserList();
-        if (res.status === 200) {
-          console.log("회원 정보들 : ", res);
-          setUserList(res.data);
-        }
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  .right {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .left {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+`;
 
-  useEffect(() => {
-    fetchData();
-  }, [selectedButton]);
+const PIESTYLE = styled.div`
+  text-align: center;
+  width: 400px;
+  height: 400px;
+  margin-bottom: 57px;
+`;
+
+const UserList = ({ selectedButton, male, female, userList, userAgeList }) => {
+  // piechart
+  const data = [
+    { title: "Male", value: male.length, color: "#ff8000" },
+    { title: "Female", value: female.length, color: "#ff0800" },
+  ];
+
+  const ageData = [
+    { name: "20대", twentiesvalue: userAgeList.twenties.length },
+    { name: "30대", thirtiesvalue: userAgeList.thirties.length },
+    { name: "40대", fortiesvalue: userAgeList.forties.length },
+    { name: "기타", others: userAgeList.others.length },
+  ];
 
   return (
     <>
@@ -67,7 +99,7 @@ const UserList = ({ selectedButton }) => {
           </thead>
           <tbody>
             {userList.map((data, index) => (
-              <tr key={data.index + 1}>
+              <tr key={index}>
                 <Td>{data.id}</Td>
                 <Td>{data.userName}</Td>
                 <Td>{data.userNickname}</Td>
@@ -82,7 +114,52 @@ const UserList = ({ selectedButton }) => {
           </tbody>
         </Table>
       )}
-      {selectedButton === "UserGraph" && {}}
+      {selectedButton === "UserGraph1" && (
+        <Container>
+          <div className="right">
+            <p style={{ fontSize: "5rem", fontWeight: "900" }}>성 비</p>
+            <PIESTYLE>
+              <PieChart
+                data={data}
+                label={({ dataEntry }) =>
+                  `${dataEntry.title}  ${Math.round(dataEntry.percentage)}%`
+                }
+                labelStyle={{
+                  fontSize: "0.5rem",
+                  fontWeight: "900",
+                }}
+              />
+              <span style={{ color: "#ff8000", fontSize: "2rem" }}>
+                {data[0].title}{" "}
+              </span>
+              <span
+                style={{
+                  color: "#ff0800",
+                  fontSize: "2rem",
+                  marginLeft: "1rem",
+                }}
+              >
+                {data[1].title}
+              </span>
+            </PIESTYLE>
+          </div>
+
+          <div className="left">
+            <p style={{ fontSize: "5rem", fontWeight: "900" }}>연 령</p>
+
+            <ResponsiveContainer width="80%" height="55%">
+              <BarChart width={500} height={300} data={ageData}>
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Bar dataKey="twentiesvalue" fill="#8884d8" />
+                <Bar dataKey="thirtiesvalue" fill="#82ca9d" />
+                <Bar dataKey="fortiesvalue" fill="#ffc658" />
+                <Bar dataKey="othres" fill="#ffc658" />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </Container>
+      )}
     </>
   );
 };

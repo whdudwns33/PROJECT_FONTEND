@@ -119,8 +119,10 @@ const AdminPage = () => {
               backgroundColor:
                 selectedButton === "Point" ? "var(--mainsky)" : "",
             }}
-            onClick={() => setSelectedButton("Point")}
-          ></button>
+            onClick={() => setSelectedButton("Category")}
+          >
+            Category
+          </button>
           <button
             style={{
               backgroundColor:

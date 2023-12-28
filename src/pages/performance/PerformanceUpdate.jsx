@@ -32,7 +32,7 @@ const PerformanceUpdate = () => {
 
   const navigate = useNavigate();
 
-  const email = (window.localStorage.getItem("email"));
+  const email = useAuth();
   console.log(email);
 
   useEffect(() => {

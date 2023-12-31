@@ -7,10 +7,30 @@ export const ItemContainer = styled.div`
     padding: 30px;
     margin-bottom: 1rem;
     box-sizing: border-box;
-    /* border: 1px solid #333; */
-    flex-direction: row;
+    border: 1px solid #333;
+    flex-direction: column;
     text-align: center;
-    @media (max-width: 1000px) {
+`;
+
+export const SearchContainer = styled.div`
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  width: 100%;
+
+  @media (max-width: 600px) {
+    display: flex;
+    flex-direction: row;
+  }
+`;
+export const ArtistSearch = styled.div`
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    width: 100%;
+    margin-top: 30px;
+    
+    @media (max-width: 600px) {
     display: flex;
     flex-direction: column;
   }
@@ -18,21 +38,31 @@ export const ItemContainer = styled.div`
 
 export const ImgContainer = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   width: 100%;
-  >div {
-    width: 25px;
-    height: 25px;
-    line-height: 2px;
-    text-align: center;
-    font-size: 24px;
-    font-weight: 400px;
+  @media (max-width: 600px) {
+    display: flex;
+    flex-direction: row;
   }
+  
 `;
 
 export const CalContainer = styled.div`
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  @media (max-width: 600px) {
+    display: flex;
+    flex-direction: row;
+  }
+`;
+
+export const CalProduct = styled.div`
+  display: flex;
   align-items: start;
+  justify-content: center;
   flex-direction: column;
   width: 100%;
   margin: 10px;
@@ -55,8 +85,7 @@ export const FreeShipping = styled.div`
   font-size: 12px;
   font-weight: 700;
   padding: 5px 8px;
-  margin: 0px 0px;
-  
+  margin: 0;
 `;
 
 export const Quantity = styled.div`
@@ -66,7 +95,6 @@ export const Quantity = styled.div`
   justify-content: space-between;
   align-items: center;
   font-size: 16px;
-
 `;
 
 export const QuantityText = styled.div`
@@ -81,18 +109,19 @@ export const Totality = styled.div`
   justify-content: space-between;
   align-items: center;
   font-size: 16px;
-  
 `;
+
 export const TotalAmount = styled.div`
   padding: 0 20px;
 `;
+
 export const BtnShape = styled.div`
   display: flex;
   padding: 10px;
   width: 100%;
-  height: 15%;
-
+  height: 100%;
 `;
+
 export const ClickBtn = styled.button`
   border-radius: 5px;
   border: none;
@@ -101,6 +130,6 @@ export const ClickBtn = styled.button`
   font-size: 12px;
   font-weight: 700;
   padding: 5px 10px;
-  margin: 3px 3px;
-  width: 100%;
+  margin: 3px 10px;
+  width: 30vw;
 `;

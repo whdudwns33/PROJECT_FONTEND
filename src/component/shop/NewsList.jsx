@@ -7,25 +7,45 @@ import "slick-carousel/slick/slick-theme.css";
 const NewsList = () => {
   const [list, setList] = useState([]);
 
-  const testList = async () => {
+  const InfoList = async () => {
     const response = await AxiosApi.newsGet();
     setList(response.data);
   };
 
   const NextArrow = (props) => (
-    <div className="nextArrow" onClick={props.onClick}>
-      ＞
+    <div 
+    className="nextArrow" 
+    onClick={props.onClick}
+    style={{ 
+      position: "absolute", 
+      top: "40%", 
+      right: "10px", 
+      zIndex: 1, 
+      backgroundColor: "white",
+      padding:"1vw",
+    }}>
+    ＞
     </div>
   );
 
   const PrevArrow = (props) => (
-    <div className="prevArrow" onClick={props.onClick}>
-      ＜
-    </div>
+    <div 
+    className="prevArrow" 
+    onClick={props.onClick}
+    style={{ 
+      position: "absolute", 
+      top: "40%", 
+      left: "10px", 
+      zIndex: 1, 
+      backgroundColor: "white",
+      padding:"1vw",
+    }}>
+    ＜
+  </div>
   );
 
   useEffect(() => {
-    testList();
+    InfoList();
   }, []);
 
   const settings = {
@@ -42,9 +62,9 @@ const NewsList = () => {
       {list.map((data, index) => (
         <div key={index} className="image-container">
           <img
-            alt="testimg"
+            alt="newsimg"
             src={data.newsImage}
-            style={{ width: "400px", height: "300px" }}
+            style={{ width: "40vw", height: "30vw" }}
             onDoubleClick={() => (window.location.href = data.newsLink)}
           />
           <h2 style={{ padding: "0 16px" }}>{data.newsTitle}</h2>

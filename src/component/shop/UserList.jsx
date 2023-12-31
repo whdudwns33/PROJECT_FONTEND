@@ -77,7 +77,7 @@ const UserList = () => {
 
   return (
     <>
-      <UserSearch searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      {/* <UserSearch searchQuery={searchQuery} setSearchQuery={setSearchQuery} /> */}
       <GridContainer
         style={{ maxHeight: `${ContainerHeight()}px`, overflow: "hidden" }}
       >

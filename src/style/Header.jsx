@@ -5,7 +5,7 @@ import headlogo2 from "../images/Symbol_color.png";
 import hamburger from "../images/Hamburger_color.png";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import UseAuth from "../hooks/UseAuth";
-import Cancel from "../images/Cancel_White.png"
+import Cancel from "../images/Cancel_White.png";
 import MemberInfoAxiosApi from "../axios/MemberInfoAxios";
 
 const NavContainer = styled.div`
@@ -25,11 +25,11 @@ const NavContainer = styled.div`
     justify-content: space-between;
   }
 
-  .leftzone{
+  .leftzone {
     display: flex;
     width: 35%;
     justify-content: flex-end;
-    .leftinleft{
+    .leftinleft {
       display: flex;
       justify-content: space-between;
       width: 40%;
@@ -74,7 +74,6 @@ const Link = styled(RouterLink)`
   text-decoration: none;
 `;
 
-
 const Sidebar = styled.div`
   display: flex;
   position: fixed;
@@ -82,7 +81,7 @@ const Sidebar = styled.div`
   max-width: 35rem;
   height: 100vh;
   background: var(--gradienttop);
-  right: ${props => props.isOpen ? '0%' : '-60%'};
+  right: ${(props) => (props.isOpen ? "0%" : "-60%")};
   transition: right 0.2s ease-in-out;
   top: 0;
   flex-direction: column;
@@ -100,7 +99,7 @@ const Sidebar = styled.div`
       font-weight: 200;
     }
   }
-  .close{
+  .close {
     width: 90%;
     height: 3.5rem;
     background-image: url(${Cancel});
@@ -129,10 +128,10 @@ const HeadLogo = styled.div`
     width: 20%;
     background-image: url(${headlogo2});
     &:hover {
-        cursor: pointer;
-        transform: scale(1.15);
-        transition: transform 0.05s ease-in-out;
-      }
+      cursor: pointer;
+      transform: scale(1.15);
+      transition: transform 0.05s ease-in-out;
+    }
   }
 `;
 
@@ -146,11 +145,10 @@ const TextBox = styled.div`
   }
 `;
 
-
 const Header = () => {
   const email = UseAuth(); // 로그인 시 로컬 스토리지의 토큰에서 이메일 정보를 가져옵니다.
-  console.log("헤더이메일조회 : ", email)
-  const [isLogIn, setIsLogIn] = useState(!!email); 
+  console.log("헤더이메일조회 : ", email);
+  const [isLogIn, setIsLogIn] = useState(!!email);
   const [isOpen, setIsOpen] = useState(false); // 사이드바의 상태를 관리합니다.
   const [userInfo, setUserInfo] = useState(null); // 유저 정보를 관리합니다.
   const navigate = useNavigate();
@@ -168,7 +166,6 @@ const Header = () => {
     memberInfo();
   }, [email]);
 
-  
   const handleLogoClick = () => {
     navigate("/");
   };
@@ -188,54 +185,88 @@ const Header = () => {
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
-  }
+  };
   return (
     <>
-    <NavContainer isOpen={isOpen}>
-      <div className="rightzone">
-          <Link to="/performance"><TextBox>공연</TextBox></Link>
-          <Link to=""><TextBox>STORE</TextBox></Link>
-          <Link to="/music-list"><TextBox>음원</TextBox></Link>
-          <Link to="/comunitypage"><TextBox>커뮤니티</TextBox></Link>
-      </div>
-      <HeadLogo onClick={handleLogoClick}/>
-      <div className="leftzone">
-        <div className="leftinleft">
-          {isLogIn ? (
-            <>
-              <TextBox onClick={handleLogout} >로그아웃</TextBox>
-              <Link to="/mypage"><TextBox>마이페이지</TextBox></Link>
-            </>
-          ) : (
-            <>
-              <Link to="/login"><TextBox>로그인</TextBox></Link>
-              <Link to="/signup"><TextBox>회원가입</TextBox></Link>
-            </>
-          )}
+      <NavContainer isOpen={isOpen}>
+        <div className="rightzone">
+          <Link to="/performance">
+            <TextBox>공연</TextBox>
+          </Link>
+          <Link to="/productPage">
+            <TextBox>STORE</TextBox>
+          </Link>
+          <Link to="/music-list">
+            <TextBox>음원</TextBox>
+          </Link>
+          <Link to="/comunitypage">
+            <TextBox>커뮤니티</TextBox>
+          </Link>
         </div>
-      </div>
-      <div className="hamburger" onClick={toggleSidebar} />  
-    </NavContainer>
-    <Sidebar isOpen={isOpen}>
-        <div className="close" onClick={toggleSidebar}/>
+        <HeadLogo onClick={handleLogoClick} />
+        <div className="leftzone">
+          <div className="leftinleft">
+            {isLogIn ? (
+              <>
+                <TextBox onClick={handleLogout}>로그아웃</TextBox>
+                <Link to="/mypage">
+                  <TextBox>마이페이지</TextBox>
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link to="/login">
+                  <TextBox>로그인</TextBox>
+                </Link>
+                <Link to="/signup">
+                  <TextBox>회원가입</TextBox>
+                </Link>
+              </>
+            )}
+          </div>
+        </div>
+        <div className="hamburger" onClick={toggleSidebar} />
+      </NavContainer>
+      <Sidebar isOpen={isOpen}>
+        <div className="close" onClick={toggleSidebar} />
         {isLogIn ? (
           <>
-          <Link to="/mypage" onClick={toggleSidebar} style={{margin:"0"}}>{userInfo.authority}</Link>
-          <Link to="/mypage" onClick={toggleSidebar} style={{fontSize:"3rem", fontWeight:"700"}}>{userInfo.userNickname} <span>님</span></Link>
-          <Link onClick={handleLogout}>로그아웃</Link>
+            <Link to="/mypage" onClick={toggleSidebar} style={{ margin: "0" }}>
+              {userInfo.authority}
+            </Link>
+            <Link
+              to="/mypage"
+              onClick={toggleSidebar}
+              style={{ fontSize: "3rem", fontWeight: "700" }}
+            >
+              {userInfo.userNickname} <span>님</span>
+            </Link>
+            <Link onClick={handleLogout}>로그아웃</Link>
           </>
-        ):(
+        ) : (
           <>
-          <Link to="login" onClick={toggleSidebar}>로그인</Link>
-          <Link to="signup" onClick={toggleSidebar}>회원가입</Link>
+            <Link to="login" onClick={toggleSidebar}>
+              로그인
+            </Link>
+            <Link to="signup" onClick={toggleSidebar}>
+              회원가입
+            </Link>
           </>
         )}
-        
-        <Link to="performance" onClick={toggleSidebar}>공연</Link>
-        <Link to="product" onClick={toggleSidebar}>STORE</Link>
-        <Link to="music" onClick={toggleSidebar}>음원</Link>
-        <Link to="comunitypage" onClick={toggleSidebar}>커뮤니티</Link>
-    </Sidebar>
+
+        <Link to="performance" onClick={toggleSidebar}>
+          공연
+        </Link>
+        <Link to="product" onClick={toggleSidebar}>
+          STORE
+        </Link>
+        <Link to="music" onClick={toggleSidebar}>
+          음원
+        </Link>
+        <Link to="comunitypage" onClick={toggleSidebar}>
+          커뮤니티
+        </Link>
+      </Sidebar>
     </>
   );
 };
